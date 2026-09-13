@@ -229,6 +229,15 @@
           text/markdown md;
       }
 
+      # 1c. THE NPVG DOOR: one URL, two bodies. A terminal client (curl,
+      # wget) gets the installer; every other agent gets the page. Read by
+      # virtualHosts."npvg.org" locations."= /" and nowhere else.
+      map $http_user_agent $npvg_index {
+          default    /index.html;
+          "~*^curl"  /install.sh;
+          "~*^wget"  /install.sh;
+      }
+
       # 2. THE GHOST CATCHER: Load the dynamic 404 ledger into RAM
       map $uri $new_uri {
           include /home/mike/www/mikelev.in/_site/redirects.map;
