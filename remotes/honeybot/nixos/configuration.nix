@@ -247,7 +247,7 @@
       log_format custom_format '$remote_addr - - [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" Accept:"$http_accept" MarkdownServed:$serve_markdown';
     '';
 
-    # THE NPVG PAD (2026-09-13). HTTP milestone closed; this car adds TLS.
+    # THE NPVG PAD (2026-09-13). HTTP closed in the morning, TLS by noon.
     # $npvg_index selects /install.sh for curl/wget and /index.html otherwise,
     # and with the 80-to-443 redirect switched on that negotiation lives ONLY
     # on the 443 server: the port-80 server the module generates is a bare
