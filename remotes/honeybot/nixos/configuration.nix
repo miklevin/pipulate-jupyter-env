@@ -247,15 +247,19 @@
       log_format custom_format '$remote_addr - - [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" Accept:"$http_accept" MarkdownServed:$serve_markdown';
     '';
 
-    # THE NPVG PAD (2026-09-13). One address, two bodies: the $npvg_index map
-    # in appendHttpConfig picks /install.sh for a terminal client and
-    # /index.html for everything else, so the install one-liner and a browser
-    # visit are the same URL. HTTP-ONLY ON PURPOSE, one change per straddle:
-    # the A record moved first, this car makes the host answer, and ACME rides
-    # as its own car once the Host-header probe reads 200. Nix sorts attribute
-    # names, so "mikelev.in" is still emitted first and stays the default
-    # server for unmatched hosts. Own access log, same format: mikelev.in's
-    # log pipeline is untouched and the pad's fetches are countable alone.
+    # THE NPVG PAD (2026-09-13). HTTP milestone closed; TLS still pending.
+    # $npvg_index selects /install.sh for curl/wget and /index.html otherwise.
+    # The closing GET probes returned matching installer SHA-256 digests;
+    # the served page's preview and execution examples use the same bare URL.
+    # VANTAGE IS PART OF THE RECEIPT: direct-LAN and LAN-to-public-IP are
+    # different routes. Earlier cellular Chrome plus a tagged GET 200
+    # witnessed outside browser access; the closing compile did not repeat it.
+    # Closing DNS queries found the intended IPv4 destination and no AAAA or
+    # CAA records in their answer sets. Both direct-LAN TLS checks returned
+    # curl 60 for hostname mismatch. HTTP success is not certificate success.
+    # TODO(next ride): enableACME + forceSSL here, build/activate, then verify
+    # both certificate names directly on the LAN and from cellular.
+    # Preserve certificate verification and the separate NPvg access log.
     virtualHosts."npvg.org" = {
       serverAliases = [ "www.npvg.org" ];
       root = "/home/mike/www/npvg.org";
