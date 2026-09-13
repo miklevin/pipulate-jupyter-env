@@ -247,20 +247,26 @@
       log_format custom_format '$remote_addr - - [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" Accept:"$http_accept" MarkdownServed:$serve_markdown';
     '';
 
-    # THE NPVG PAD (2026-09-13). HTTP milestone closed; TLS still pending.
-    # $npvg_index selects /install.sh for curl/wget and /index.html otherwise.
-    # The closing GET probes returned matching installer SHA-256 digests;
-    # the served page's preview and execution examples use the same bare URL.
-    # VANTAGE IS PART OF THE RECEIPT: direct-LAN and LAN-to-public-IP are
-    # different routes. Earlier cellular Chrome plus a tagged GET 200
-    # witnessed outside browser access; the closing compile did not repeat it.
-    # Closing DNS queries found the intended IPv4 destination and no AAAA or
-    # CAA records in their answer sets. Both direct-LAN TLS checks returned
-    # curl 60 for hostname mismatch. HTTP success is not certificate success.
-    # TODO(next ride): enableACME + forceSSL here, build/activate, then verify
-    # both certificate names directly on the LAN and from cellular.
-    # Preserve certificate verification and the separate NPvg access log.
+    # THE NPVG PAD (2026-09-13). HTTP milestone closed; this car adds TLS.
+    # $npvg_index selects /install.sh for curl/wget and /index.html otherwise,
+    # and with the 80-to-443 redirect switched on that negotiation lives ONLY
+    # on the 443 server: the port-80 server the module generates is a bare
+    # 301 plus the acme-challenge location, so curl -fsSL http://... still
+    # lands the script by following the redirect. The certificate covers the
+    # apex and the serverAliases entry (the module passes aliases as extra
+    # domain names) and is ordered by HTTP-01 through the SHARED
+    # /var/lib/acme/acme-challenge webroot mikelev.in already uses. Shared on
+    # purpose: one lego, one nginx, one token filename per order, nothing to
+    # isolate and no second authority to keep in sync.
+    # KNOWN SEAM, left alone here: the generated port-80 redirect carries no
+    # extraConfig, so its 301s log to the shared access.log with no host
+    # column, exactly as mikelev.in's own redirects do. npvg.access.log holds
+    # the 443 side, which is where the body ships and where the funnel reads.
+    # VANTAGE IS PART OF THE RECEIPT: verify on the box (loopback, hostname
+    # kept with --resolve) and from cellular; LAN-to-public-IP hits the router.
     virtualHosts."npvg.org" = {
+      forceSSL = true;      # port 80 becomes a 301; the door moves to 443
+      enableACME = true;    # HTTP-01 via the shared acme-challenge webroot
       serverAliases = [ "www.npvg.org" ];
       root = "/home/mike/www/npvg.org";
       extraConfig = ''
