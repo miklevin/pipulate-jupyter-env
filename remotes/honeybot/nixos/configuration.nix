@@ -247,6 +247,41 @@
       log_format custom_format '$remote_addr - - [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" Accept:"$http_accept" MarkdownServed:$serve_markdown';
     '';
 
+    # THE NPVG PAD (2026-09-13). One address, two bodies: the $npvg_index map
+    # in appendHttpConfig picks /install.sh for a terminal client and
+    # /index.html for everything else, so the install one-liner and a browser
+    # visit are the same URL. HTTP-ONLY ON PURPOSE, one change per straddle:
+    # the A record moved first, this car makes the host answer, and ACME rides
+    # as its own car once the Host-header probe reads 200. Nix sorts attribute
+    # names, so "mikelev.in" is still emitted first and stays the default
+    # server for unmatched hosts. Own access log, same format: mikelev.in's
+    # log pipeline is untouched and the pad's fetches are countable alone.
+    virtualHosts."npvg.org" = {
+      serverAliases = [ "www.npvg.org" ];
+      root = "/home/mike/www/npvg.org";
+      extraConfig = ''
+        access_log /var/log/nginx/npvg.access.log ai_tracker;
+      '';
+
+      # THE DOOR: only the bare path negotiates by client.
+      locations."= /" = {
+        extraConfig = ''
+          add_header Vary "User-Agent" always;
+          types {
+              text/html          html;
+              text/x-shellscript sh;
+          }
+          try_files $npvg_index =404;
+        '';
+      };
+
+      locations."/" = {
+        extraConfig = ''
+          try_files $uri $uri/index.html =404;
+        '';
+      };
+    };
+
     virtualHosts."mikelev.in" = {
       forceSSL = true;      # Force all traffic to HTTPS 
       enableACME = true;    # Let's Encrypt magic 
