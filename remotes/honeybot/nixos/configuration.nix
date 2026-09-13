@@ -264,6 +264,10 @@
     # the 443 side, which is where the body ships and where the funnel reads.
     # VANTAGE IS PART OF THE RECEIPT: verify on the box (loopback, hostname
     # kept with --resolve) and from cellular; LAN-to-public-IP hits the router.
+    # WITNESSED 2026-09-13 (deed foo-e6dc53f0-1371): loopback on both names
+    # read CN=npvg.org, a Let's Encrypt issuer, verified, HTTP/2 200; a
+    # cellular Safari GET over h2 answered 200; the port-80 301s landed in
+    # the shared log and the 443 bodies here; the renew timer is armed.
     virtualHosts."npvg.org" = {
       forceSSL = true;      # port 80 becomes a 301; the door moves to 443
       enableACME = true;    # HTTP-01 via the shared acme-challenge webroot
