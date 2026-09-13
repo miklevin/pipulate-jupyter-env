@@ -1303,6 +1303,12 @@ foo_files.py      #  <-- THIS file. Content compiler router. Makes it very meta.
 # here with `h`, `j`, `k`, `l`. Save-and-quit is a bit tricky because another
 # file is also loaded: `Esc`, `:`, `q`, `w`, `!`
 
+# 1. **Probe**: Baseline Reading
+# 2. **Context**: Post-experiment *planned* reading instructions
+# 3. **Patch**: The experiment and how to make it happen
+# 4. **Prompt**: Post-experiment instructions and how to read results
+# 5. **Deliverable**: How the world is forever different moving forward
+
 # If this is stressing you out and you're a quitter and want to quit, just type:
 # `Esc`, `:`, `q`, `!`, `Enter`. That will exit without saving any changes. If
 # you want to get over this hump, type: `Esc`, `:`, `T`, `u`, `t`, `o`, `r`, `Enter`.
