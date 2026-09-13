@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 # Deploy "Brain" to Honeybot
+# DEPLOYMENT BOUNDARY (2026-09-13):
+# A served body changes when its file is synced; an HTML-only edit does not
+# require a NixOS rebuild. Prefer a targeted sync for a body-only change.
+# NixOS configuration is merely staged here. Its runtime changes require a
+# successful build and activation before an AFTER probe can witness them.
+# "Sync Complete" alone proves neither activation nor certificate issuance.
 
 TARGET="mike@192.168.10.100"
 
