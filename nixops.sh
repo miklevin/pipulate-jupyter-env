@@ -17,6 +17,13 @@ rsync --delete -av remotes/honeybot/scripts/ $TARGET:~/www/mikelev.in/scripts/
 # Surgical sync of the visual display and patronus engine assets
 rsync -av imports/ascii_displays.py $TARGET:~/www/mikelev.in/imports/
 
+echo "🚀 Syncing NPvg pad (one address, two bodies)..."
+ssh $TARGET "mkdir -p ~/www/npvg.org"
+rsync -av remotes/honeybot/www/npvg.org/ $TARGET:~/www/npvg.org/
+# ONE SOURCE, TWO PROJECTIONS: the installer lives at assets/installer/install.sh.
+# release.py projects it to Pipulate.com; this line projects it to the pad.
+rsync -av assets/installer/install.sh $TARGET:~/www/npvg.org/install.sh
+
 echo "🚀 Syncing NixOS Config..."
 rsync --delete -av remotes/honeybot/nixos/ $TARGET:~/nixos-config-staged/
 
