@@ -348,5 +348,10 @@ else
 fi
 }
 
-# Pass through the original arguments; call unconditionally to preserve -e.
-main "$@"
+# THE CALL LINE IS INSIDE A FENCE TOO (2026-09-13). A stream that ends on
+# exactly the word main, its arguments cut off, would run a complete install
+# under the DEFAULT name. A brace group turns any cut before the closing
+# brace into a syntax error, the same guard nvm's installer wraps around its
+# whole file. main is still called unconditionally, so -e is preserved
+# inside it, and exit carries main's status out of the group unchanged.
+{ main "$@"; exit; }
