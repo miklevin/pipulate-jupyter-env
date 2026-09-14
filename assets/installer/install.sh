@@ -35,6 +35,10 @@
 # The more robust approach is to let nix ensure git is available before attempting any
 # git operations in the controlled nix environment.
 
+# Wait for the complete function body before starting installation.
+# A stream cut inside this body cannot execute a partial install.
+# Leave the body indentation unchanged, including the embedded ./run heredoc.
+main() {
 # Detect shell compatibility - pipefail is bash-specific
 if [ -z "${BASH_VERSION:-}" ]; then
     echo "❌ Error: This script requires bash but is being run with a different shell."
@@ -342,3 +346,7 @@ else
     # Fallback for highly restricted environments
     cd "${TARGET_DIR}" && ${NIX_DEVELOP_CMD}
 fi
+}
+
+# Pass through the original arguments; call unconditionally to preserve -e.
+main "$@"
