@@ -120,11 +120,11 @@ AI_PHOOEY_CHOP = r"""#                                                          
 # This is a real-time book that's already done and always being written.
 
 # --- START STATS ---
-# There are 1,467 already-written articles about this repo at MikeLev.in (Public)
-# Velocity: 12 published in the last 7 days
-# Markdown negotiated: 2,586 reads (0.22% of all responses)
-# DOM hydration: 2936 trapdoor triggers from 15 non-local IPs (top-N sample, self excluded)
-# Honeybot telemetry fetched 2026-09-14T08:42Z
+# There are 1,468 already-written articles about this repo at MikeLev.in (Public)
+# Velocity: 13 published in the last 7 days
+# Markdown negotiated: 2,587 reads (0.22% of all responses)
+# DOM hydration: 2937 trapdoor triggers from 15 non-local IPs (top-N sample, self excluded)
+# Honeybot telemetry fetched 2026-09-14T15:54Z
 # --- END STATS ---
 
 # --- START RECEIPTS (newest first; cap 20 lines; a line pushed past the cap is deleted, never moved -- git and the rolling pin are the archive) ---
@@ -3033,7 +3033,7 @@ foo_files.py
 # remotes/honeybot/queries/hydration_selftest.sql  # [1,204 tokens | 4,235 bytes]
 # remotes/honeybot/queries/intel_markdown_affinity.sql  # [434 tokens | 1,686 bytes]
 # remotes/honeybot/queries/ua_variants.sql  # [645 tokens | 2,535 bytes]
-# remotes/honeybot/www/npvg.org/index.html  # [338 tokens | 1,151 bytes]
+# remotes/honeybot/www/npvg.org/index.html  # [331 tokens | 1,129 bytes]
 # scripts/articles/Notebooks/Shared/README.md  # [136 tokens | 605 bytes]
 # scripts/articles/build_hierarchy.py  # [2,460 tokens | 10,361 bytes]
 # scripts/articles/build_navgraph.py  # [2,119 tokens | 9,029 bytes]
