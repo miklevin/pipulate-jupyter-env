@@ -20,8 +20,8 @@ PROMPT_PLACEHOLDER = "[INSERT FULL ARTICLE]"
 INSTRUCTIONS_CACHE_FILE = "instructions.json"
 
 # Model Selection - Use a stable model to avoid low quotas
-DEFAULT_MODEL = 'gemini-flash-latest'
-# DEFAULT_MODEL = 'gemini-flash-lite-latest'
+# DEFAULT_MODEL = 'gemini-flash-latest'
+DEFAULT_MODEL = 'gemini-flash-lite-latest'
 
 SPINE_PLACEHOLDER = "[INSERT BOOK SPINE]"
 # THE BLOG FOLDER REACHES THE MODEL (banked 2026-09-04). editing_prompt.txt is
