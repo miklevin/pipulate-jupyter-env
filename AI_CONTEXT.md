@@ -1,8 +1,8 @@
 # AI_CONTEXT.md — Start Here If You Are an AI
 
-> Auto-generated on 2026-09-06. Rewritten from scratch on every release. If this
+> Auto-generated on 2026-09-14. Rewritten from scratch on every release. If this
 > date looks stale, assume the rest of the repo is newer than this map.
-> 1454 entries indexed.
+> 1468 entries indexed.
 
 You are reading the orientation file for **Pipulate**, a local-first,
 hand-cranked AI/SEO automation framework (the NPvg stack: Nix, Python, Vim,
@@ -96,31 +96,45 @@ The first 20 entries include full `index.md` URLs to establish
 the link pattern. All remaining entries are bare slugs. Reconstruct any full
 URL as: `https://mikelev.in/futureproof/{slug}/index.md`
 
+- [2026-09-14] [The Wrong Front Door: Split DNS, DHCP Leases, and Verifiable Local Testing](https://mikelev.in/futureproof/wrong-front-door-split-dns-dhcp/index.md)
+- [2026-09-14] [The Chain of Custody: Multi-Model Review and Verifiable Script Hardening](https://mikelev.in/futureproof/chain-of-custody-multi-model-review/index.md)
+- [2026-09-13] [The ACME Airlock and the Cellular Witness: Verifying HTTPS in the Age of AI](https://mikelev.in/futureproof/acme-airlock-cellular-receipts/index.md)
+- [2026-09-13] [Model Handoff and the Cellular Witness: Engineering Verifiable Deployments](https://mikelev.in/futureproof/model-handoff-and-the-cellular-witness/index.md)
+- [2026-09-12] [The Unix Way in the Age of AI: Replayable Workflows Without the Bloat](https://mikelev.in/futureproof/unix-way-ai-replayable-workflows/index.md)
+- [2026-09-11] [Navigating Slack: An Important Ergonomic Appraisal for the Age of AI](https://mikelev.in/futureproof/navigating-slack-ergonomic-appraisal-age-of-ai/index.md)
+- [2026-09-10] [Unearned Alligators and Textile Looms: A Reflection on Quality Assurance in the Age of AI](https://mikelev.in/futureproof/unearned-alligators-textile-looms-qa-ai/index.md)
+- [2026-09-09] [Taming the Unstable Throttle: Engineering Replayable NixOS Upgrades](https://mikelev.in/futureproof/taming-the-unstable-throttle-replayable-nixos-upgrades/index.md)
+- [2026-09-08] [Closing the Loop: Replayable AI Workflows and the End of Manual Edits](https://mikelev.in/futureproof/replayable-ai-workflows-and-profile-identity/index.md)
+- [2026-09-08] [The Browser Is the API: Managing Chrome Bookmarks with Nix and Python](https://mikelev.in/futureproof/browser-api-managing-chrome-bookmarks-nix-python/index.md)
+- [2026-09-08] [Reversible Endosymbiosis: Engineering Verifiable AI Workflows](https://mikelev.in/futureproof/reversible-endosymbiosis-verifiable-ai-workflows/index.md)
+- [2026-09-08] [Bridging Browser Capture to Context Compilers in the Age of AI](https://mikelev.in/futureproof/bridging-browser-capture-to-context-compilers/index.md)
+- [2026-09-07] [Two Years, Four Models, and One Verifiable Record](https://mikelev.in/futureproof/two-years-four-models-one-verifiable-record/index.md)
+- [2026-09-06] [The List Is the Test: When Context Compilers Grade Their Own Work](https://mikelev.in/futureproof/the-list-is-the-test/index.md)
 - [2026-09-06] [Archive, Not Artifact: Checking What the AI Actually Did](https://mikelev.in/futureproof/archive-not-artifact-checkable-ai-receipts/index.md)
 - [2026-09-06] [The World Is Your Checklist: Visual Surveillance of Extremities in the Age of AI](https://mikelev.in/futureproof/visual-surveillance-extremities-receipts/index.md)
 - [2026-09-05] [Three Tools, One Pipeline: Connecting Walk, Router, and Context Compiler](https://mikelev.in/futureproof/three-tools-one-pipeline-walk-router-compiler/index.md)
 - [2026-09-05] [The Two-Reader Rule: Quieting the Console with Verifiable Receipts](https://mikelev.in/futureproof/two-reader-rule-console-silence/index.md)
 - [2026-09-05] [Laser Coherence and the Git Pickaxe: Recovering Vanished Code with Reproducible Receipts](https://mikelev.in/futureproof/laser-coherence-and-the-git-pickaxe/index.md)
 - [2026-09-05] [The Discrimination Test: Separating Console Furniture from Verifiable Receipts](https://mikelev.in/futureproof/console-furniture-discrimination-test-receipts/index.md)
-- [2026-09-05] [The Envelope and the Seal: Turning Ephemeral AI Prompts into Verifiable Deeds](https://mikelev.in/futureproof/cartridge-deed-outside-the-envelope/index.md)
-- [2026-09-05] [Prompt Well: How the Context Compiler Turns AI Vibes into Replayable Receipts](https://mikelev.in/futureproof/prompt-well-context-compiler-receipts/index.md)
-- [2026-09-04] [The Write-Side / Read-Side Split: Un-Hardwiring Blog Paths in Declarative Pipelines](https://mikelev.in/futureproof/unhardwiring-blog-paths-write-read-split/index.md)
-- [2026-09-04] [The Blind Fan-Out: Five Models, One Judge, and the File That Refused](https://mikelev.in/futureproof/blind-fanout-model-evaluation-and-flight-recorder/index.md)
-- [2026-09-04] [Closing the Loop: Replayable AI Workflows and the End of Manual Edits](https://mikelev.in/futureproof/closing-the-loop-replayable-ai-workflows-and-manual-edits/index.md)
-- [2026-09-04] [Forgetting with Style: Building a Replayable Memory Engine for AI Workflows](https://mikelev.in/futureproof/forgetting-with-style-replayable-memory-engine/index.md)
-- [2026-09-03] [Restoring Replayable Navigation: Moving from Quadratic Overhead to O(1) Data-Driven Layouts](https://mikelev.in/futureproof/restoring-replayable-navigation-data-driven-layouts/index.md)
-- [2026-09-03] [Fixing Google Doc Titles: Automated Pipeline Repairs in the Age of AI](https://mikelev.in/futureproof/fixing-google-doc-titles-pipeline-repairs/index.md)
-- [2026-09-03] [The Scientific Method of Vibe-Coding: Engineering Replayable AI Workflows](https://mikelev.in/futureproof/scientific-method-vibe-coding-replayable-workflows/index.md)
-- [2026-09-03] [The Text Command Is the Mouse for AI: Engineering Replayable Workflows](https://mikelev.in/futureproof/text-commands-the-mouse-for-ai/index.md)
-- [2026-09-02] [Completing the Loop: Optional Stops and the SE Ticket Template](https://mikelev.in/futureproof/completing-the-loop-optional-stops-se-ticket-template/index.md)
-- [2026-09-02] [First-Frame Responsiveness: Engineering Instant UI Feedback in Vim](https://mikelev.in/futureproof/first-frame-responsiveness-vim/index.md)
-- [2026-09-01] [The Pre-Flight Principle: Engineering Deterministic AI Workflows Before the Crash](https://mikelev.in/futureproof/pre-flight-principle-deterministic-ai-workflows/index.md)
-- [2026-09-01] [The Flag Beats the Hardware: Investigating Claude Cowork, Linux VMs, and Hypervisor Gates in the Age of AI](https://mikelev.in/futureproof/claude-cowork-linux-vm-hypervisor-gates/index.md)
 
 ## Compact slug index — pattern: https://mikelev.in/futureproof/{slug}/index.md
 
 Format: `[date] [size] slug` — fetch any entry as `https://mikelev.in/futureproof/{slug}/index.md`
 
+- [2026-09-05] [168k] cartridge-deed-outside-the-envelope
+- [2026-09-05] [259k] prompt-well-context-compiler-receipts
+- [2026-09-04] [159k] unhardwiring-blog-paths-write-read-split
+- [2026-09-04] [195k] blind-fanout-model-evaluation-and-flight-recorder
+- [2026-09-04] [88k] closing-the-loop-replayable-ai-workflows-and-manual-edits
+- [2026-09-04] [166k] forgetting-with-style-replayable-memory-engine
+- [2026-09-03] [73k] restoring-replayable-navigation-data-driven-layouts
+- [2026-09-03] [35k] fixing-google-doc-titles-pipeline-repairs
+- [2026-09-03] [70k] scientific-method-vibe-coding-replayable-workflows
+- [2026-09-03] [142k] text-commands-the-mouse-for-ai
+- [2026-09-02] [189k] completing-the-loop-optional-stops-se-ticket-template
+- [2026-09-02] [32k] first-frame-responsiveness-vim
+- [2026-09-01] [179k] pre-flight-principle-deterministic-ai-workflows
+- [2026-09-01] [70k] claude-cowork-linux-vm-hypervisor-gates
 - [2026-09-01] [238k] myelinating-mcp-terminal-native-tooling-and-session-hygiene
 - [2026-08-31] [72k] first-cell-failures-setup-ergonomics-ai
 - [2026-08-31] [80k] taking-it-from-top-frictionless-command-line-workshop
