@@ -285,6 +285,21 @@
               text/html          html;
               text/x-shellscript sh;
           }
+          # THE STAMP (2026-09-14). install.sh carries one contiguous
+          # placeholder for its default folder name and falls back to
+          # "pipulate" when the placeholder arrives untouched. This door
+          # rewrites it to "npvg" in the served body, so one file on disk
+          # installs to ~/npvg from here and to ~/pipulate from the other
+          # door, which has no such filter. sub_filter_types is required
+          # because the module filters text/html alone by default, and the
+          # types block above serves the script as text/x-shellscript.
+          # sub_filter_once off replaces the contiguous spelling wherever
+          # it appears and can never reach the split spelling the script
+          # compares against. Witnessed 2026-09-14: the running
+          # nginx-1.28.0 reports http_sub_module compiled in.
+          sub_filter_types text/x-shellscript;
+          sub_filter_once off;
+          sub_filter '__INSTALL_DEFAULT_NAME__' 'npvg';
           try_files $npvg_index =404;
         '';
       };
