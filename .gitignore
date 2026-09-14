@@ -1,4 +1,11 @@
 # start temp
+# IGNORED IS NOT GONE (2026-09-14). A router admin page saved as a hydrated
+# DOM landed in the repo root as deleteme.html, carrying a CSRF token and
+# the router's internal hostname, and this line covered only deleteme*.txt.
+# It sat untracked through two compiles, one blast from public, and the
+# compiler kept reading it into payloads. Widened to every extension, and
+# the file was still deleted by hand: a gitignore pattern hides a file from
+# git, not from the disk, the compiler, or a probe's glob.
 deleteme*
 Notebooks/Advanced_Notebooks/Whatsa_Lambda.ipynb
 patch
