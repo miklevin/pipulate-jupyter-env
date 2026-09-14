@@ -200,7 +200,7 @@ function git_commit_push()
     local last_commit_time = vim.fn.system('git log -1 --format=%cr ' .. vim.fn.shellescape(file_name)):gsub("\n", "")
     if last_commit_time == "" then last_commit_time = "First commit" end
     
-    local target_model = "gemma3:latest (Default)" 
+    local target_model = "ai.py default (config.DEFAULT_PROMPT_MODEL); actual reported as Model Used below" 
 
     -- ==========================================================
     -- INSTANT DRAMATIC FEEDBACK: Open the split immediately
