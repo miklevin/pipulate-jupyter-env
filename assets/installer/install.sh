@@ -259,10 +259,24 @@ print_separator
 echo
 
 # Before the exec command, add:
-echo "Setting up app identity as '$CUSTOM_NAME'..."
-echo "$CUSTOM_NAME" > "${TARGET_DIR}/whitelabel.txt"
-chmod 644 "${TARGET_DIR}/whitelabel.txt"
-echo "✅ Application identity set."
+# THE ARGUMENT NAMES THE LABEL; THE DOOR NAMES THE FOLDER (2026-09-14).
+# whitelabel.txt is the app's identity: the banner the flake prints on
+# entry, the server's own name, and the database filenames config.py
+# derives from it. It used to be written from CUSTOM_NAME unconditionally,
+# so a default install from a door that stamps the folder "npvg" would
+# have renamed the app Npvg and its databases with it. Now only an
+# explicit argument writes it. A default install leaves the file absent,
+# and the flake's own first-entry fallback names the app, "Pipulate" for
+# any folder without botify in its name. mck.sh always passes its
+# whitelabel as the argument, so the launcher's lane is unchanged. The
+# explicit path still announces itself; the default path prints nothing
+# here because it did nothing here.
+if [ -n "${1:-}" ]; then
+  echo "Setting up app identity as '$CUSTOM_NAME'..."
+  echo "$CUSTOM_NAME" > "${TARGET_DIR}/whitelabel.txt"
+  chmod 644 "${TARGET_DIR}/whitelabel.txt"
+  echo "✅ Application identity set."
+fi
 echo
 
 # Creating the 'Double-Click' Actuator
