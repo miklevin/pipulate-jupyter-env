@@ -2420,13 +2420,7 @@ foo_files.py
 # proving a deliberately staled working copy is actually replaced, and
 # `exit` then `nix develop` named as the ignition.
 
-# EARMARK — CURL-PIPE TRUNCATION SAFETY. assets/installer/install.sh runs
-# top-to-bottom, so a download truncated mid-transfer executes a PARTIAL script:
-# it can mkdir the target, half-fetch a key, and exit clean. Wrap the body in
-# main() { ... } with main "$@" as the last line, so a truncation can only ever
-# fail to define main and nothing runs. Gate on `bash -n` of a truncated copy
-# exiting NONZERO -- today it exits zero, which is the whole defect. Owed before
-# npvg.org serves a one-liner to strangers.
+# - TODO (2026-09-14): CURL-PIPE TRUNCATION SAFETY landed in source 2026-09-13 (install.sh: the main() wrapper plus the brace-group call line) and npvg.org now serves the one-liner; its gate, bash -n on a truncated copy exiting NONZERO, has no receipt in this router; take it once and delete this line.
 
 
 # NO PLACEHOLDERS IN PASTE-READY LINES (convicted 2026-08-30, both lanes): <NAME> in a shell line is a redirection from a file called NAME -- "No such file or directory" -- silent in the compile lane, loud in the operator lane, dead in both. Write "$NAME" and put `export NAME=...` once on the line above; a variable runs verbatim, a placeholder needs an edit the human will not make.
