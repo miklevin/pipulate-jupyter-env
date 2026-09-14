@@ -57,7 +57,22 @@ fi
 set -euo pipefail
 
 # At the beginning, add argument handling
-CUSTOM_NAME="${1:-pipulate}"  # Default to "pipulate" if no arg provided
+# THE DOOR NAMES THE FOLDER (2026-09-14). One installer file, two addresses:
+# pipulate.com serves this file as-is, and npvg.org's nginx stamps the
+# placeholder below to "npvg" at the door, the way mck.sh's header already
+# describes for its trail name. The split spelling of _ph_name is the one
+# occurrence a stamp can never touch, so stamped and unstamped copies stay
+# distinguishable after substitution. An explicit argument still wins, and
+# an unstamped copy falls back to the folder name this script has always
+# used, so publishing this before the door exists changes nothing.
+_tpl_name='__INSTALL_DEFAULT_NAME__'
+_ph_name='__INSTALL_DEFAULT_''NAME__'
+if [ "$_tpl_name" != "$_ph_name" ]; then
+  DEFAULT_NAME="$_tpl_name"
+else
+  DEFAULT_NAME="pipulate"
+fi
+CUSTOM_NAME="${1:-$DEFAULT_NAME}"  # An argument names the folder; the door names the default
 
 # --- Configuration ---
 REPO_USER="miklevin"
