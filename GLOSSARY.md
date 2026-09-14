@@ -605,6 +605,41 @@ Entries are alphabetical, numbers spelled as spoken.
   trusts afterward. Witnessed unsolicited at strikes one and two of the
   KEY/VALUE ride: git diff hunk headers displaced by exactly the top-of-file
   delta, with no probe asked to look.
+- **The Door Names the Folder** — *serve-time placeholder substitution with a
+  substitution-proof sentinel.* Banked 2026-09-14, receipt-witnessed across
+  four compiles. THE ASK: one installer that lands in ~/npvg from npvg.org
+  and in ~/pipulate from pipulate.com, so the uninstall line is rm -rf on
+  the folder the door named. TWO WRONG DESIGNS, written down so nobody
+  re-derives them: two files (two authorities for one thing drift, and the
+  three-digest gate that proves both doors current breaks by construction),
+  and origin detection inside the script (a piped script is anonymous --
+  $0 is the word bash, and the pipe carries no address). THE MECHANISM: the
+  script carries one contiguous placeholder and a fallback; the door that
+  wants a different default rewrites the placeholder in the served body
+  with nginx sub_filter -- sub_filter_types naming the served MIME type,
+  because the module filters text/html alone by default, and
+  sub_filter_once off so every contiguous copy is stamped -- and the script
+  tells stamped from unstamped by comparing the placeholder against the
+  SAME WORD SPELLED IN TWO HALVES, glued by the shell at run time, which no
+  substitution can see as one word. mck.sh carried the trick for its trail
+  name since v0.2.0; install.sh carries it for the folder since 2026-09-14.
+  RENT THIS PAYS, two predictions: the same bytes on disk evaluate to
+  different defaults through different doors (npvg_door=npvg,
+  pipulate_door=pipulate), and THE ROUND-TRIP GATE holds -- the served
+  body with its one token reversed hashes to the repository file, which
+  proves the door changed one token and nothing else (064cad99 on both
+  sides). DEPLOYED IS A PROPERTY OF EACH DOOR, never of a commit: the
+  repo digest moved one compile before either door's did, because each
+  door has its own truck (release.py to Pages, nixops.sh plus
+  nixos-rebuild switch to the pad), and the honest way to call a door
+  current is to fetch from it and hash what arrived. A URL stamp wants its
+  OWN placeholder: a hostname rewrite would also move KEY_URL, which lives
+  at the old door on purpose. SIBLING of THE WRITE-SIDE / READ-SIDE SPLIT:
+  the folder name and the app label were one string answering two
+  questions, and the same ride split them -- an explicit argument names
+  the label, the door names the folder, and a default install leaves
+  whitelabel.txt to the flake, whose capitalized spelling then names the
+  writer (the receipt read Pipulate, capital P, in a folder named npvg).
 - **The Dotfile-Blind Probe** — *ripgrep's hidden-file default.* Banked
   2026-08-05, self-convicted. ripgrep skips hidden files by default, so any rg
   probe hunting a name that lives in .gitignore, .gitattributes, or any other
