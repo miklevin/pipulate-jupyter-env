@@ -108,28 +108,19 @@ get_nix_develop_cmd() {
 NIX_DEVELOP_CMD=$(get_nix_develop_cmd)
 
 # --- Display Banner ---
-# WHITELABEL-AWARE AND ANCESTOR-DISCIPLINED (2026-08-04). Two defects in two
-# echo lines, both in the highest-traffic first-contact position there is.
-# (1) The name was hardcoded, so a whitelabeled install greeted a stranger with
-#     a product name that is NOT the folder they are about to own. Whitelabel
-#     is a first-class path, and the very first line printed said it was not.
-#     CUSTOM_NAME is already resolved above; use it.
-# (2) "SEO Software" is the RETIRED identity. The ancestor is named as lineage,
-#     never as identity, and this line was still leading with it to every
-#     newcomer who has ever run the installer.
+# ONE LINE, NOT A BOX (2026-09-14, the first Mac install from npvg.org). The
+# seven-line box printed the same in every world. A stranger needs two
+# readings here: which door they came through (BANNER_NAME follows the folder
+# the door named) and where the folder lands. The uninstall rides on the same
+# line so "yours to delete" is a command rather than a promise. The 2026-08-04
+# rulings still hold: the name is CUSTOM_NAME, never a hardcoded product, and
+# the retired ancestor identity is never printed.
 BANNER_NAME=$(printf '%s' "${CUSTOM_NAME}" | awk '{print toupper(substr($0,1,1)) substr($0,2)}')
-echo
-print_separator
-echo "   🚀 Welcome to the ${BANNER_NAME} Installer 🚀"
-echo "   Local-first, Nix-reproducible, and yours to delete."
-echo "   A context compiler. Prompt well."
-print_separator
-echo
+echo "${BANNER_NAME} -> ~/${CUSTOM_NAME}   (to remove it later: rm -rf ~/${CUSTOM_NAME})"
 
 # --- Dependency Checks ---
 # Note: We check for minimal dependencies that are needed for this phase
 # Git is NOT required at this stage - the flake will handle git operations later
-echo "🔍 Checking prerequisites..."
 check_command "curl"
 check_command "unzip"
 
@@ -151,12 +142,10 @@ if ! command -v nix &> /dev/null; then
   exit 0
 fi
 
-echo "✅ All required tools found."
-echo
+
 
 # --- Target Directory Handling ---
 # Check if target directory already exists and gracefully fail
-echo "📁 Checking target directory: ${TARGET_DIR}"
 if [ -d "${TARGET_DIR}" ]; then
   echo "❌ Error: Directory '${TARGET_DIR}' already exists."
   echo "   The installer cannot proceed when the target directory already exists."
@@ -174,24 +163,18 @@ if [ -d "${TARGET_DIR}" ]; then
   echo
   exit 1
 else
-  echo "✅ Target directory is available."
-  echo "📁 Creating directory '${TARGET_DIR}'"
   mkdir -p "${TARGET_DIR}"
 fi
 
 # --- Download and Extract ---
 # The "magic cookie" approach begins here - downloading the ZIP archive
 # This is more reliable across systems than using git directly
-echo "📥 Downloading Pipulate source code..."
 # Download to a temporary file
 TMP_ZIP_FILE=$(mktemp)
 # Ensure temp file is removed on exit
 trap 'rm -f "$TMP_ZIP_FILE"' EXIT
-curl -L --fail -# -o "${TMP_ZIP_FILE}" "${ZIP_URL}"
-echo "✅ Download complete."
-echo
+curl -L --fail -sS -o "${TMP_ZIP_FILE}" "${ZIP_URL}"
 
-echo "📦 Extracting source code..."
 # Create a temporary directory for extraction
 TMP_EXTRACT_PATH=$(mktemp -d)
 trap 'rm -rf "$TMP_EXTRACT_PATH"; rm -f "$TMP_ZIP_FILE"' EXIT
@@ -210,26 +193,16 @@ fi
 # Using cp first to ensure all files are copied correctly
 cp -R "${FULL_EXTRACT_DIR}/." "${TARGET_DIR}/"
 rm -f "$TMP_ZIP_FILE"
-echo "✅ Extraction complete. Source code installed to '${TARGET_DIR}'."
-echo
 
 # --- Navigate Into Project ---
 cd "${TARGET_DIR}"
-echo "📍 Now in directory: $(pwd)"
-echo
 
 # --- Deploy Key Setup ("Magic Cookie") ---
 # Part of the "magic cookie" is the SSH key that will allow the flake
 # to perform git operations without password prompts
-echo "🔑 Fetching the shared deploy key from ${KEY_URL}..."
-echo "   (Public, ROT13-encoded, pull-only: it exists so this folder can fetch"
-echo "    updates without a GitHub account. nix develop decodes it into"
-echo "    ~/.ssh/id_rsa only if no key is there already.)"
 mkdir -p .ssh
 # Use curl to fetch the key from the URL and save it to .ssh/rot
-if curl -L -sS --fail -o .ssh/rot "${KEY_URL}"; then
-  echo "✅ Deploy key downloaded."
-else
+if ! curl -L -sS --fail -o .ssh/rot "${KEY_URL}"; then
   echo "❌ Error: Failed to download deployment key from ${KEY_URL}."
   # Optional: remove potentially incomplete key file
   rm -f .ssh/rot
@@ -244,19 +217,16 @@ if [ ! -s .ssh/rot ]; then
 fi
 
 chmod 600 .ssh/rot # Important: Set permissions for the raw key file
-echo "🔒 Deploy key saved as .ssh/rot (mode 600)."
-echo
+# THE ONE DISCLOSURE THAT STAYS (2026-09-14). A key landing on a stranger's
+# disk is an act worth one plain sentence, and the flake decodes it into
+# ~/.ssh/id_rsa on first entry if no key is there. Four lines of mechanism
+# became one line of fact; the failure branch above keeps its full message.
+echo "Deploy key saved to .ssh/rot (public, pull-only: it lets this folder fetch updates without a GitHub account)."
 
 # --- Trigger Initial Nix Build & Git Conversion ---
 # Now we hand over to nix develop, which will activate the flake
 # The flake will handle converting this to a proper git repository
-echo "🚀 Starting the ${BANNER_NAME} environment..."
-print_separator
-echo "  Source is in place at: ${TARGET_DIR}  "
-echo "  To come back later, run:  "
-echo "  cd ${TARGET_DIR} && ${NIX_DEVELOP_CMD}  "
-print_separator
-echo
+echo "To come back later:  cd ~/${CUSTOM_NAME} && nix develop"
 
 # Before the exec command, add:
 # THE ARGUMENT NAMES THE LABEL; THE DOOR NAMES THE FOLDER (2026-09-14).
@@ -277,10 +247,8 @@ if [ -n "${1:-}" ]; then
   chmod 644 "${TARGET_DIR}/whitelabel.txt"
   echo "✅ Application identity set."
 fi
-echo
 
 # Creating the 'Double-Click' Actuator
-echo "Creating ./run -- a one-file shortcut for the cd-and-nix-develop line above."
 cat > "${TARGET_DIR}/run" << 'EOL'
 #!/usr/bin/env bash
 cd "$(dirname "$0")" 
@@ -304,23 +272,13 @@ chmod +x "${TARGET_DIR}/run"
 # The nix flake will take over from here, handling the git repository setup
 # This is the final step of the "magic cookie" approach - letting the controlled
 # nix environment handle the git operations
-# THE STICK BUG LANE STAYS QUIET, AND HONEST (2026-08-04). These four lines
-# fired on BOTH lanes, and on the PIPULATE_INSTALL_ONLY lane the middle one was
-# FALSE: that branch enters .#quiet, which carries neither runScript nor
-# gitUpdateLogic, so no magic-cookie transformation happens there. A verb naming
-# an act no code performed, printed at first contact, on the one lane whose
-# whole design goal is to be barely there. The default lane keeps its output
-# byte-for-byte; the walk lane gets exactly one true line, because a silent
-# minute-long hydration is its own kind of lie.
-if [ "${PIPULATE_INSTALL_ONLY:-0}" = "1" ]; then
-  echo "Hydrating the Nix environment (this may take a minute)..."
-else
-  echo
-  echo "Next, nix develop builds the environment and turns this folder into a"
-  echo "git repository (the 'magic cookie' step) so it can auto-update from now on."
-  echo "🚀 Booting the Forever Machine..."
-  echo "Please wait while the Nix environment hydrates..."
-fi
+# ONE LINE, BOTH LANES (2026-09-14). The default lane printed four lines here
+# that the walk lane printed as one, and the first Mac install from npvg.org
+# read all four as narration. Both lanes now get the same true sentence, and
+# it names the one thing a stranger cannot see: that the silence about to
+# follow is a download, not a hang. The magic-cookie step keeps its own
+# verdict line in flake.nix, printed only when the transformation fires.
+echo "Hydrating the Nix environment (the first time can take a few minutes)..."
 
 # The Terminal Hand-off:
 # We spawn a fresh shell attached directly to the physical terminal. 
@@ -347,7 +305,6 @@ fi
 # transformation fires on the first plain `nix develop` in that folder. Riding
 # a trail does not need it.
 if [ "${PIPULATE_INSTALL_ONLY:-0}" = "1" ]; then
-  echo "PIPULATE_INSTALL_ONLY=1 - hydrating the environment, not opening a workshop."
   IMPURE_FLAG=""
   if [ "$(uname -s)" = "Darwin" ]; then
     IMPURE_FLAG="--impure"
