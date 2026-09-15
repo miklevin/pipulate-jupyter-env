@@ -88,7 +88,7 @@ def _start_scrape_music(verbose=True):
         print(r"""
         ⏳  THE SUMMONING — thumper planted, hooks in hand
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                 o     Cloudflare drums the sand beneath us;
+                 o     The page is settling beneath us;
                 /|\    we wait it out, staked and hooked.
       ~~ 🎵 jeopardy.wav looping until the Maker surfaces ~~
 """)

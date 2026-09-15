@@ -605,8 +605,8 @@ def _announce_consent(trail_path):
     print(" A local-file failure is reported; the clipboard attempt still runs.")
     print(" Inlined lenses:")
     print(f"   {', '.join(DECANT_INLINE_KEYS)}")
-    print(" Those come from pages you were LOGGED IN TO. Response headers and the")
-    print(" accessibility tree carry real session and account material.")
+    print(" These pages may be public or authenticated. Response headers and the")
+    print(" accessibility tree may carry session and account material.")
     print(" TWO WORDS, TWO ACTS: CAPTURE gates collection to this machine;")
     print(f" {DECANT_TOKEN} gates the checked preview file and clipboard attempt.")
     print(" No flag skips either. Baseline checks are not a guarantee of safe disclosure.")
@@ -876,8 +876,8 @@ async def _ride_steps(trail_path, archive, dry_narrate=False, exports_path=None)
         # or warning line; this reports only what IT witnessed, which is the
         # human's authorization.
         if decanted:
-            print("   Paste it into any ChatBot (Claude, ChatGPT, Gemini) and it")
-            print("   will walk you through everything from here.")
+            print("   Review the preview before sharing it with a chatbot.")
+            print("   Ask it to separate what the files show from what it infers.")
         # The archive file line was printed when its status was banked.
     return 0
 
