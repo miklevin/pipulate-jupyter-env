@@ -111,6 +111,19 @@ def _capture_compatible(trail):
 # --- DECANT: pour captured artifacts into one clipboard-ready payload --------
 # Preview only: these lenses are frozen from the banked bytes, then capped.
 # The full local captures.md is independent of these presentation limits.
+# BANKED 2026-09-15 -- HANDOFF COVERAGE: name a requested lens that did not
+# arrive; returned empty text is present, not missing. The private preview
+# file and clipboard attempt receive the same checked string. The fixed
+# filename denotes the last successful save, not the last attempted ride.
+# NEXT RIDE -- THE FIRST FIVE MINUTES, ON RAILS (not implemented): disclose
+# preview saving and clipboard replacement before choosing the real walk;
+# complete after the final capture and existing checks without another word.
+# Keep CAPTURE synchronization, archive integrity, caps, scrubbing, secret
+# checks, private replacement and honest destination-specific failures.
+# Change narration, public pages, launcher and completion labels together;
+# move fingerprint/checkword exercises after completion. Frame practice as
+# rehearsal. Explicitly scope shared/custom behavior: a private trail can
+# shadow public_walk, so its name alone does not identify the bundled route.
 DECANT_INLINE_KEYS = (
     "seo_md",
     "headers",
