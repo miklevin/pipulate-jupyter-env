@@ -713,8 +713,8 @@ async def _ride_steps(trail_path, archive, dry_narrate=False, exports_path=None)
         # moves to WARNING for the ride only: provenance fallbacks, driver
         # failures and CDP misses still print, because those change what the
         # capture MEANS. PIPULATE_RIDE_LOG=INFO restores the chatter when a
-        # ride needs debugging. print() output is untouched: the summoning
-        # art and both fences ride on it, and it is the human's channel.
+        # ride needs debugging. print() output is untouched: the wait message
+        # and both fences ride on it, and it is the human's channel.
         try:
             from loguru import logger as _ride_log
             _ride_log.remove()

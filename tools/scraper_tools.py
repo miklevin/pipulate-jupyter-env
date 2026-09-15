@@ -58,7 +58,7 @@ def _guided_path_component(url: str) -> tuple[str, str]:
     return parsed.netloc, f"{readable_path}--{url_digest}"
 
 
-# --- The Summoning Music (think-music during the Cloudflare wait) ---
+# --- Optional audio during browser startup ---
 # Forked from stream.py's start_updating_music/stop_updating_music pattern:
 # a marker-tagged shell loop in its OWN process group (os.setsid), killed as
 # a group, with an idempotent pkill backstop keyed to the marker so it can
@@ -84,14 +84,7 @@ def _start_scrape_music(verbose=True):
     music = _find_music_file()
     if not music:
         return None
-    if verbose:
-        print(r"""
-        ⏳  THE SUMMONING — thumper planted, hooks in hand
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                 o     The page is settling beneath us;
-                /|\    we wait it out, staked and hooked.
-      ~~ 🎵 jeopardy.wav looping until the Maker surfaces ~~
-""")
+
     try:
         return subprocess.Popen(
             ["sh", "-c", f'while :; do aplay -q -D default "{music}"; done # {SCRAPE_MUSIC_MARKER}'],
@@ -559,6 +552,8 @@ async def _selenium_capture(params: dict, checkpoint=None) -> dict:
             temp_profile = True
             logger.info(f"👻 Using temporary profile: {profile_path}")
         
+        if verbose:
+            print("Opening the browser; waiting for the page...", flush=True)
         music_proc = _start_scrape_music(verbose=verbose)
         logger.info(f"🚀 Initializing undetected-chromedriver (Headless: {headless})...")
         try:
