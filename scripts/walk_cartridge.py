@@ -2,7 +2,7 @@
 """
 walk_cartridge.py -- the sealed, immutable form of a Mother Cat trail.
 
-Schema: walk-cartridge-integrity-v2. Stdlib only. Single file by design.
+Schema: walk-cartridge-integrity-v3. Stdlib only. Single file by design.
 
 WHY THIS DOES NOT IMPORT scripts/foo_cartridge.py
 -------------------------------------------------
