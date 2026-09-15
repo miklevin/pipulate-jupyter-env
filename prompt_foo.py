@@ -1417,6 +1417,11 @@ def copy_to_clipboard(text: str):
     """Copies text to the system clipboard gracefully across macOS and Linux."""
     import platform
     
+    # BANKED 2026-09-15 -- RETURN IS NOT DELIVERY: this helper reports via
+    # its own messages and returns no delivery status. An SSH bridge write
+    # is not confirmation of the client's clipboard. Callers must not turn
+    # normal return, or a saved preview, into an unconditional copy claim.
+    # Preserve separate file and clipboard outcomes when shortening output.
     # === THE 80/20 SSH BYPASS ===
     # If logged in via SSH, dump to the bridge file instead of fighting X11
     if os.getenv("SSH_CLIENT"):
