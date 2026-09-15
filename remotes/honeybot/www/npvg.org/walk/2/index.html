@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:,">
+<title>Stop 2 of 3: the fingerprints</title>
+<style>
+  body  { max-width: 40rem; margin: 3rem auto; padding: 0 1rem; font: 18px/1.5 Georgia, serif; }
+  pre   { padding: 1rem; background: #f4f4f4; overflow-x: auto; }
+  .word { font: bold 1.6rem/1.2 monospace; letter-spacing: 0.1em; }
+</style>
+</head>
+<body>
+<p>Stop 2 of 3</p>
+<h1>The first page is already written down.</h1>
+<p>Before this page opened, your terminal printed two lines worth reading:</p>
+<ul>
+<li>A line starting with <code>LOCAL ARCHIVE</code>. The path after it, up to the parenthesis, is a text file. It holds every file saved at the first stop, each with its size and its fingerprint.</li>
+<li>A line starting with <code>Captured. final_url=</code>. The number after <code>artifacts=</code> on that line is how many files the first stop saved.</li>
+</ul>
+<p>You do not have to take that number on trust. Open a second terminal window and count the fingerprints yourself. Type this, then a space, then paste the path from the <code>LOCAL ARCHIVE</code> line:</p>
+<pre>grep -c '"sha256"'</pre>
+<p>The number it prints should match the number after <code>artifacts=</code>. The program reported something, and a second instrument, one the program did not write, checked the report. That is the whole idea of this workshop in one move.</p>
+<p>If the two numbers disagree, you have found something real. Keep both lines.</p>
+<p>When you are done, go back to the first terminal and type:</p>
+<p class="word">CAPTURE</p>
+</body>
+</html>
