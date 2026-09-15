@@ -640,6 +640,18 @@ Entries are alphabetical, numbers spelled as spoken.
   the label, the door names the folder, and a default install leaves
   whitelabel.txt to the flake, whose capitalized spelling then names the
   writer (the receipt read Pipulate, capital P, in a folder named npvg).
+  SECOND WITNESS (2026-09-14, the quieting ride), and it corrected the
+  operator's own assumption: release.py never touches the pad. The
+  publish-only lane pushed install.sh into the Pipulate.com repo and said
+  so, while the pad's copy moved only because nixops.sh's rsync ran (the
+  install.sh line under "Syncing NPvg pad"); had the release lane run alone,
+  the pipulate.com count would have moved and the npvg.org count stayed. And
+  the rebuild is the CONFIG's truck, never the body's: two nixos-rebuild
+  switch runs that ride built no derivations, restarted no unit, and followed
+  a config rsync that listed no file, against the door ride's 22 derivations
+  and an nginx restart. A body-only change to a served file is one rsync;
+  nixops.sh prints the rebuild line as an offer, and publish pairs the two
+  because a publish may carry config.
 - **The Dotfile-Blind Probe** — *ripgrep's hidden-file default.* Banked
   2026-08-05, self-convicted. ripgrep skips hidden files by default, so any rg
   probe hunting a name that lives in .gitignore, .gitattributes, or any other
