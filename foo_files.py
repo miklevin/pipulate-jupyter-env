@@ -1664,13 +1664,19 @@ __init__.py                 # <-- Version info
 # tests/test_mck_rep2.py      # <-- Rep 2: the earmark's owed side-by-side witness
 #
 # THE TRAILS (bundled; each status is the newest receipt, never a promise)
-# assets/trails/public_walk.yaml         # profile default; SETTLE trivial; three public pages, connector noop.py; RIDDEN 2026-08-01; what bare `walk` rides
+# assets/trails/public_walk.yaml         # profile default; SETTLE trivial; three unlinked npvg.org pages (the_word, the_receipt, the_two_pages), inline script on stop three only, connector noop.py; UNRIDDEN since the rewrite -- the 2026-08-01 ride walked the OLD stop set (example.com, mikelev.in, pipulate.com); what bare `walk` rides
 # assets/trails/practice.yaml            # one configurable page; UNREAD, label stale since 2026-08-01
 # assets/trails/first_context.yaml       # profile default; SETTLE real; Jira/Botify/Gmail, THREE wallet kinds in one trail; UNRIDDEN
 # assets/trails/botify_pageworkers.yaml  # profile botify; SETTLE real; UNRIDDEN -- the only trail on a non-default profile, and no such ride has ever been witnessed
 # assets/trails/jira_for_you.yaml        # profile default; SETTLE real (Atlassian sign-in); top of the ticket loop; RIDDEN 2026-09-01 and DECANTED, the sign-in moment unrecorded (a cold profile records it)
 # assets/trails/ticket.yaml              # profile default; SETTLE real; url_env x2 (JIRA, BOTIFY) fed by one gitignored exports file per ticket under Notebooks/Client_Work/tickets/; stop two of the ticket loop; RIDDEN 2026-09-01 to stop 1 then REFUSED at stop 2 on an unset url_env, Linux and Mac -- the ride that bought the rider its PRE-FLIGHT. RULING: the connector does NOT run at DECANT (DECANT gates only CAPTURE-fenced material; API auth is a different wallet; the rider never harvests). The bridge to the issue text is a ! line in adhoc.txt.
 # assets/trails/se_ticket.yaml           # profile default; SETTLE real; the SE ticket template: for_you (literal) + issue (JIRA, required) + project/slack/confluence (optional, skipped when unset); RIDDEN 2026-09-02, 3 of 5 captured, 2 skipped, 72,383 B decanted, card showed both rows; harvest regexes on optional stops are PLACEHOLDERS (botify_analysis's already fullmatched a live analysisSlug); guidance strings hand-count "of five" and go stale on the sixth stop
+#
+# UNLINKED PAGES (npvg.org; nothing links to them and no page links out, so a trail is the only edge; nixops.sh rsyncs them, no rebuild)
+# remotes/honeybot/www/npvg.org/index.html          # <-- the door: a browser gets this page, curl and wget get install.sh ($npvg_index)
+# remotes/honeybot/www/npvg.org/walk/1/index.html   # <-- public_walk stop one: the capture word; no script, so source and hydrated DOM should match
+# remotes/honeybot/www/npvg.org/walk/2/index.html   # <-- stop two: count the archive's fingerprints against the terminal's artifacts= number
+# remotes/honeybot/www/npvg.org/walk/3/index.html   # <-- stop three: the walk's only script rewrites the server's sentence and appends a paragraph; the DECANT test lives here
 #
 # OFF-ROSTER DISTRIBUTION RESIDUE (not a walk dependency)
 # assets/installer/replay.sh  # <-- OFF the roster 2026-08-01, stranded; re-add needs syntax + one ride + a pinned verifier fetch
