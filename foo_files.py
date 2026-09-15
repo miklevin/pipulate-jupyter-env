@@ -3048,7 +3048,6 @@ foo_files.py
 # scripts/flippers.py  # [350 tokens | 1,309 bytes]
 # scripts/gsc/facet_allowlist.py  # [2,538 tokens | 10,602 bytes]
 # scripts/map_sheet.py  # [3,614 tokens | 15,613 bytes]
-# scripts/mcp_dummy_server.py  # [6,529 tokens | 27,647 bytes]
 # scripts/playground/prompt_feeder.py  # [746 tokens | 3,154 bytes]
 # scripts/refactor_cards.py  # [381 tokens | 1,483 bytes]
 # scripts/test_car_b.py  # [283 tokens | 1,090 bytes]
