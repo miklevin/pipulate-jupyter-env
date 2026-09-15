@@ -1644,7 +1644,7 @@ __init__.py                 # <-- Version info
 # scripts/bookmark_import.py  # <-- One bookmark folder -> <name>.walk.md (the human surface) + <name>.exports.sh (the URL values; gitignored by pattern so they never ship)
 #
 # COMPILE
-# scripts/walk_compile.py     # <-- .walk.md -> assets/trails/<name>.yaml; refuses on every TODO left in the surface; stdlib only, imports nothing
+# scripts/walk_compile.py     # <-- .walk.md -> <name>.yaml BESIDE the surface, and only where git ignores it; url_env stops only (it refuses a scheme separator anywhere in its output), so it is the PRIVATE lane's compiler and a bundled trail in assets/trails/ is hand-written JSON; refuses on every TODO left in the surface; stdlib only, imports nothing
 #
 # VALIDATE
 # scripts/walk.py             # <-- Car A, the planner: loads a trail, refuses unknown or missing keys in BOTH directions, prints the dry-run plan; holds DEFAULT_TRAIL; never actuates
