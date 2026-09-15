@@ -446,6 +446,7 @@ async def _selenium_capture(params: dict, checkpoint=None) -> dict:
             ("seo.md", "seo_md"),
             ("links.md", "links_md"),
             ("diff_hierarchy.txt", "diff_hierarchy_txt"),
+            ("diff_simple_dom.txt", "diff_simple_txt"),
             ("accessibility_tree_summary.txt", "accessibility_tree_summary"),
             ("optics_manifest.txt", "optics_manifest"),
         ]:
@@ -912,6 +913,7 @@ async def _selenium_capture(params: dict, checkpoint=None) -> dict:
                 ('source_hierarchy_txt', 'source_dom_hierarchy.txt'),
                 # ... (keep the rest of the original list if desired, or prune)
                 ('diff_hierarchy_txt', 'diff_hierarchy.txt'),
+                ('diff_simple_txt', 'diff_simple_dom.txt'),
                 ('links_md', 'links.md'),
                 # etc.
             ]:
