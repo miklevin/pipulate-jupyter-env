@@ -742,12 +742,9 @@ async def _ride_steps(trail_path, archive, dry_narrate=False, exports_path=None)
     stops = trail["stops"]
     print(f"Riding trail '{trail['name']}' -- {len(stops)} stop(s).\n")
     # DISCLOSURE, NOT A FENCE, AND THAT IS THE RULING RATHER THAN AN OVERSIGHT.
-    # mck.sh already carries a RIDE confirmation, and CEREMONY IS SKIPPABLE;
-    # BARRIERS ARE NOT: a confirmation authorizes a SEQUENCE and may be skipped,
-    # a fence authorizes each WRITE and may not. A second pre-ride token would
-    # duplicate a shipped, skippable confirmation -- the sibling-.md failure in
-    # flag form. So the surface PRINTS, unconditionally, including under
-    # --dry-narrate, which is the one pass mck.sh forces on first contact.
+    # mck.sh owns the practice/real-walk choice. CEREMONY IS SKIPPABLE;
+    # BARRIERS ARE NOT: each CAPTURE and DECANT remain in the rider.
+    # This surface prints on both paths; practice does not authorize a ride.
     # THE DECANT FENCE LANDED, so this comment's earlier claim that nothing
     # gated the clipboard is RETIRED rather than merely outdated. What the call
     # buys NOW is disclosure BEFORE the material exists: the rider learns at t=0

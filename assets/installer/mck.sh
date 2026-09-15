@@ -68,10 +68,11 @@
 #   PIPULATE_ROOT             checkout location (else discovered)
 #   PIPULATE_WHITELABEL       install folder name and namespace (default: pipulate)
 #   PIPULATE_INSTALL_URL      where install.sh is fetched from
-#   PIPULATE_MCK_ASSUME_YES   =1 skips the INSTALL and RIDE confirmations
+#   PIPULATE_MCK_ASSUME_YES   =1 skips INSTALL and the menu; rehearses then rides
 #   PIPULATE_TRAIL_*_URL      pre-set any stop URL; built-in defaults use :=
 #                             and therefore never override you
 #
+# Plain invocation offers Practice walk, Walk the walk, or Exit before narration.
 # FLAGS:
 #   --exports=PATH  the exports file for this ride when it is NOT the
 #            <trail>.exports.sh sibling bookmark_import.py writes. This
@@ -81,7 +82,7 @@
 #            offer, no browser, no voice, no writes, no network. This is the
 #            probe that makes marker discovery witnessable without needing a
 #            fresh machine.
-#   --yolo   skip the spoken rehearsal AND both confirmations. It does NOT
+#   --yolo   skip INSTALL confirmation and the walk menu. It does NOT
 #            skip the CAPTURE fence at any stop, nor the DECANT gate at the
 #            end, and no flag ever will. --yolo is typed BEFORE the ride, so
 #            it cannot consent to the disposition of material that did not
@@ -506,44 +507,47 @@ run_rider() {
   fi
 }
 if [ "$YOLO" -eq 1 ]; then
-  echo "--yolo: skipping the spoken rehearsal and the RIDE confirmation."
-  echo "        NOT skipped, and not skippable by any flag: the CAPTURE fence"
-  echo "        at every stop. Nothing is written until you type the word."
-  echo "        Also NOT skipped: the DECANT gate at the end. Nothing leaves"
-  echo "        this machine until you type that word too."
-fi
-if [ "$YOLO" -eq 0 ]; then
-cat <<CARD
---------------------------------------------------------------
-   MOTHER CAT KATA -- rehearsal first, nothing moves
---------------------------------------------------------------
- workshop : $ROOT
- trail    : $TRAIL_NAME
- file     : $ROOT/$TRAIL_PATH
- The next pass READS the walk aloud. During it:
-   - no browser opens
-   - no file is written
-   - no credential is read
- Listen to the whole thing, then decide.
---------------------------------------------------------------
-CARD
-run_rider --dry-narrate
-fi
-if [ "$YOLO" -eq 1 ] || [ "${PIPULATE_MCK_ASSUME_YES:-0}" = "1" ]; then
-  echo "Confirmation skipped. Every CAPTURE fence still stands."
+  echo "--yolo: real walk; CAPTURE and DECANT are still required."
+elif [ "${PIPULATE_MCK_ASSUME_YES:-0}" = "1" ]; then
+  echo "ASSUME_YES: practice, then the real walk; CAPTURE and DECANT still required."
+  run_rider --dry-narrate
 else
-  printf '\nType RIDE and press Enter to do it for real (anything else stops here).\nRIDE> '
-  ANSWER=""
-  if ! IFS= read -r ANSWER </dev/tty; then
-    echo "" >&2
-    echo "No controlling terminal to confirm on (/dev/tty unavailable)." >&2
-    echo "   Ride it by hand instead:  mothercat $TRAIL_PATH" >&2
+  if ! { exec 3</dev/tty; } 2>/dev/null; then
+    echo "No controlling terminal; run walk from a terminal." >&2
     exit 1
   fi
-  if [ "$ANSWER" != "RIDE" ]; then
-    echo "Stopped by human. Nothing opened, nothing written."
-    exit 0
-  fi
+  while :; do
+    printf '\nChoose a walk:\n'
+    printf '  1  Practice walk  - voice and instructions; no browser or page capture.\n'
+    printf '  2  Walk the walk  - open the browser; CAPTURE and DECANT still required.\n'
+    printf '  q  Exit (Enter also exits).\nChoice: '
+    ANSWER=""
+    if ! IFS= read -r ANSWER <&3; then
+      printf '\nStopped. No real walk started.\n'
+      exec 3<&-
+      exit 0
+    fi
+    case "$ANSWER" in
+      1)
+        echo "Practice walk: no browser or page capture."
+        PRACTICE_RC=0
+        run_rider --dry-narrate <&3 3<&- || PRACTICE_RC=$?
+        if [ "$PRACTICE_RC" -ne 0 ]; then
+          echo "Practice stopped (exit $PRACTICE_RC). No real walk started." >&2
+          exec 3<&-
+          exit "$PRACTICE_RC"
+        fi
+        ;;
+      2|RIDE) break ;;
+      q|Q|"")
+        echo "Stopped. No real walk started."
+        exec 3<&-
+        exit 0
+        ;;
+      *) echo "Choose 1, 2 or q; Enter exits." ;;
+    esac
+  done
+  exec 3<&-
 fi
 # THE STDIN REDIRECT IS LOAD-BEARING, NOT DECORATION. Under curl|bash this
 # script's stdin is the PIPE, and guided_browser_capture's PRE-LAUNCH gate

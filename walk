@@ -16,10 +16,9 @@
 # strict DRY-RUN PLANNER: it validates a trail, prints a plan, opens no
 # browser and writes nothing. The ride lives in assets/installer/mck.sh,
 # which owns workshop discovery, the install offer, the trail search path,
-# entry into nix develop when it is needed, the spoken rehearsal, the RIDE
-# confirmation, every per-stop CAPTURE fence, and the final DECANT gate. A
-# short command that skipped any of those would be a different and weaker
-# command wearing this name.
+# entry into nix develop when it is needed, the practice/real-walk choice,
+# every per-stop CAPTURE fence, and the final DECANT gate. The launcher owns
+# which ceremony is optional; this wrapper never reimplements those choices.
 #
 # IT DOES NOT KNOW THE DEFAULT TRAIL. mck.sh already defaults TRAIL_NAME to
 # public_walk. Repeating that rule here would mint a second authority for
