@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "public_walk",
-  "description": "Welcome to the public walk: three public pages, nothing to log into, nothing to export. At each stop a browser opens. Look at the page, then come back to this terminal and type the capture word when it asks.",
+  "description": "Welcome to the public walk. It has three short pages, with nothing to log in to and nothing to set up. At each stop a browser will open on one page. Read the page, then come back to this terminal and type the word CAPTURE when it asks.",
   "defaults": {
     "take_screenshot": false,
     "headless": false,
@@ -14,10 +14,10 @@
   },
   "stops": [
     {
-      "name": "walk_one",
-      "label": "Example Domain",
-      "guidance": "Stop one of three. A visible browser will open on a plain placeholder page. There is nothing to log into and nothing to click. When the page has loaded, return to this terminal and type the capture word when asked.",
-      "url": "https://example.com/",
+      "name": "the_word",
+      "label": "The capture word",
+      "guidance": "Stop one of three. A browser will open on a plain page with no script on it. The page will explain the one word this walk asks of you. When you have read it, come back to this terminal and type CAPTURE when it asks.",
+      "url": "https://npvg.org/walk/1/",
       "target_slot": "slot_one",
       "harvest_regex": ".+",
       "connector": {
@@ -27,10 +27,10 @@
       }
     },
     {
-      "name": "walk_two",
-      "label": "MikeLev.in",
-      "guidance": "Stop two of three. The next page is a long-form article site. Let it finish loading, scroll if you like, then return to the terminal and type the capture word when asked.",
-      "url": "https://mikelev.in/",
+      "name": "the_receipt",
+      "label": "The fingerprints",
+      "guidance": "Stop two of three. By the time the next page opens, the first page will have been saved, with a fingerprint for every file. The page will show you one command that counts those fingerprints, so you can check the terminal's report for yourself. When you have tried it, type CAPTURE.",
+      "url": "https://npvg.org/walk/2/",
       "target_slot": "slot_two",
       "harvest_regex": ".+",
       "connector": {
@@ -40,10 +40,10 @@
       }
     },
     {
-      "name": "walk_three",
-      "label": "Pipulate.com",
-      "guidance": "Stop three of three. This is the last page. When it has loaded, return to the terminal and type the capture word. After this capture the bundle is assembled, and then you are asked ONE more time, with a different word, before this is compiled into context.",
-      "url": "https://pipulate.com/",
+      "name": "the_two_pages",
+      "label": "Two versions of one page",
+      "guidance": "Stop three of three, the last. This page will change itself after it loads, so the page the server sends and the page your browser shows will not match. Type CAPTURE, and the program will ask for one more word, DECANT, before anything goes to your clipboard. The page will say what to do with the result.",
+      "url": "https://npvg.org/walk/3/",
       "target_slot": "slot_three",
       "harvest_regex": ".+",
       "connector": {
