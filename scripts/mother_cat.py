@@ -120,6 +120,7 @@ DECANT_INLINE_KEYS = (
     "optics_manifest",
 )
 DECANT_INLINE_CAP = 20000  # chars per inlined lens; the rest lives on disk
+DECANT_PREVIEW_PATH = REPO_ROOT / "data" / "decant-preview.md"
 
 
 def _capture_append(archive, record):
@@ -390,8 +391,8 @@ def _decant_checkpoint(payload, captured):
     answer = ""
     try:
         print(
-            f"   Type {DECANT_TOKEN} to copy it to your clipboard "
-            "(anything else keeps it here)."
+            f"   Type {DECANT_TOKEN} to save the checked preview and attempt its clipboard copy "
+            "(anything else leaves any older preview unchanged)."
         )
         print(f"   {DECANT_TOKEN}> ", end="", flush=True)
         answer = stream.readline()
@@ -405,12 +406,35 @@ def _decant_checkpoint(payload, captured):
         _print_artifact_homes(captured)
         return False
     print(
-        f"\n   AUTHORIZED by human: handing {payload_bytes:,} bytes to the "
-        "clipboard writer."
+        f"\n   AUTHORIZED by human: checking {payload_bytes:,} assembled bytes "
+        "before the preview-file and clipboard attempts."
     )
     return _decant_to_clipboard(payload)
+def _write_decant_preview(payload):
+    """Atomically replace the private preview; never append or follow its old inode."""
+    target = DECANT_PREVIEW_PATH
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temp = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", newline="\n", dir=target.parent,
+            prefix=".decant-", delete=False,
+        ) as stream:
+            temp = Path(stream.name)
+            os.fchmod(stream.fileno(), 0o600)
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temp, target)
+        temp = None
+    finally:
+        if temp is not None:
+            temp.unlink(missing_ok=True)
+    return target
+
+
 def _decant_to_clipboard(payload):
-    """Copy the bundle to the clipboard, reusing prompt_foo's cross-platform path.
+    """Check once, save locally, then attempt the existing clipboard handoff.
 
     Deferred import: prompt_foo drags tiktoken/pydot in at module load, so it is
     imported HERE, on a real DECANT only -- never on module import or
@@ -426,6 +450,15 @@ def _decant_to_clipboard(payload):
     if leaks or secrets:
         print("   BLOCKED: preview withheld; local evidence is unchanged.")
         return False
+    # AFTER the human's word and baseline checks: one string, two destinations.
+    try:
+        target = _write_decant_preview(scrubbed)
+    except OSError as exc:
+        print(f"   LOCAL PREVIEW NOT UPDATED ({type(exc).__name__}): {DECANT_PREVIEW_PATH}")
+        print("   Any older preview is unchanged; the clipboard attempt continues.")
+    else:
+        digest = hashlib.sha256(scrubbed.encode("utf-8")).hexdigest()
+        print(f"   LOCAL PREVIEW {target} (0600; sha256={digest})")
     copy_to_clipboard(scrubbed)
     return True
 
@@ -563,16 +596,20 @@ def _announce_consent(trail_path):
     print(" A completed nonempty run also selects it in a local adhocwalk.txt.")
     print(" That router write does not compile, disclose, or copy the archive.")
     print(" AT THE END, selected lenses become a capped preview, not the archive.")
-    print(" DECANT applies the compiler's baseline disclosure checks before copy.")
-    print(" You are asked ONE more time before that preview goes anywhere. Type")
-    print(f" {DECANT_TOKEN} and it is copied to your clipboard; type anything else")
-    print(" and it stays here, and the rider prints the exact directories your")
-    print(" artifacts are sitting in. Inlined lenses:")
+    print(" DECANT applies the compiler's baseline disclosure checks before release.")
+    print(f" Type {DECANT_TOKEN} at the end to authorize a local preview file")
+    print(" and a clipboard attempt, both using the same checked text.")
+    print(f" Preview file: {DECANT_PREVIEW_PATH} (0600; replaced, not appended).")
+    print(" Only an authorized preview passing those checks replaces this file.")
+    print(" Declined, refused or blocked attempts leave any older preview unchanged.")
+    print(" A local-file failure is reported; the clipboard attempt still runs.")
+    print(" Inlined lenses:")
     print(f"   {', '.join(DECANT_INLINE_KEYS)}")
     print(" Those come from pages you were LOGGED IN TO. Response headers and the")
     print(" accessibility tree carry real session and account material.")
-    print(" TWO WORDS, TWO ACTS: CAPTURE gates each WRITE TO DISK on this machine;")
-    print(f" {DECANT_TOKEN} gates the composite LEAVING it. No flag skips either.")
+    print(" TWO WORDS, TWO ACTS: CAPTURE gates collection to this machine;")
+    print(f" {DECANT_TOKEN} gates the checked preview file and clipboard attempt.")
+    print(" No flag skips either. Baseline checks are not a guarantee of safe disclosure.")
     print(" Read the bundle before you paste it anywhere.")
     print(rule)
     print("")
