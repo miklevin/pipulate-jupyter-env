@@ -116,7 +116,7 @@ DECANT_INLINE_KEYS = (
     "headers",
     "accessibility_tree_summary",
     "links_md",
-    "diff_hierarchy_txt",
+    "diff_simple_txt",
     "optics_manifest",
 )
 DECANT_INLINE_CAP = 20000  # chars per inlined lens; the rest lives on disk
@@ -296,6 +296,9 @@ def _decant(captured, previews, skipped=()):
         parts.append("- artifacts on disk:")
         for key, path in sorted(artifacts.items()):
             parts.append(f"  - {key}: {path}")
+        missing = [key for key in DECANT_INLINE_KEYS if key not in preview]
+        if missing:
+            parts.append("- missing preview lenses: " + ", ".join(missing))
         parts.append("")
         for key, text in preview.items():
             parts.append(f"### {stop_name} -- {key}")
@@ -862,9 +865,10 @@ class CaptureDisclosureError(ValueError):
     """A refusal carrying only fixed, content-free diagnostics."""
 
 
-# Deliberately narrower than the capture: no network, HTML, headers or binary.
+# Selected text lenses, including the simplified-HTML diff; not raw HTML files,
+# network logs, headers or binary artifacts.
 CAPTURE_DISCLOSURE_TEXT_KEYS = frozenset((
-    "seo_md", "links_md", "accessibility_tree_summary", "diff_hierarchy_txt",
+    "seo_md", "links_md", "accessibility_tree_summary", "diff_simple_txt",
 ))
 
 
