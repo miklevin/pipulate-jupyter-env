@@ -870,6 +870,22 @@ AI_PHOOEY_CHOP = r"""#                                                          
 # inline; clearing it is a no-op on a clean shell, so the defensive spelling
 # costs nothing. Sibling of LANE-DISAGREEMENT -- that one is a probe blind to a
 # patch, this one is an environment blind to a shim.
+# SECOND CONVICTION (2026-09-14, the default hand-off lane, commit 2672812c):
+# the install-only branch got its inline clear on 2026-08-01 and the bash -c
+# hand-off below it never did, so curl|bash from INSIDE a workshop shell died
+# at the loader for six weeks while every clean-shell install passed -- one
+# script, healthy in the only lane strangers use. WITNESSED TWO WAYS. By
+# mechanism, in both lanes at once: `bash -c "nix --version"` printed the
+# libssl loader line and `bash -c "LD_LIBRARY_PATH='' nix --version"` printed
+# a version, hand-run and as a compile receipt, so the exact spelling the
+# hand-off now carries is OBSERVED neutralizing the pollution. By install:
+# curl|bash from (nix) pipulate $ reached the flake's verdict, and that
+# verdict's backup path named NESTED temp dirs
+# (/tmp/nix-shell.RAvap0/nix-shell.5muKTN/...), the lane labeling itself,
+# because a clean shell prints one level. COROLLARY: the compile lane IS the
+# failing lane in miniature -- prompt_foo's ! executor spawns children that
+# inherit the pollution and never the nix() function -- so a shim of this
+# class can be witnessed from a compile without another install.
 # THE SINGLE-CANDIDATE BLINDNESS RULE (banked 2026-08-01, selector-convicted):
 # a SELECTOR cannot be witnessed while only one candidate exists, because
 # selection and fallback print the IDENTICAL answer -- and that answer is the
