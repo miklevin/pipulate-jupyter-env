@@ -122,9 +122,9 @@ AI_PHOOEY_CHOP = r"""#                                                          
 # --- START STATS ---
 # There are 1,472 already-written articles about this repo at MikeLev.in (Public)
 # Velocity: 16 published in the last 7 days
-# Markdown negotiated: 2,599 reads (0.22% of all responses)
-# DOM hydration: 2947 trapdoor triggers from 15 non-local IPs (top-N sample, self excluded)
-# Honeybot telemetry fetched 2026-09-15T15:23Z
+# Markdown negotiated: 2,602 reads (0.22% of all responses)
+# DOM hydration: 2951 trapdoor triggers from 15 non-local IPs (top-N sample, self excluded)
+# Honeybot telemetry fetched 2026-09-15T21:45Z
 # --- END STATS ---
 
 # --- START RECEIPTS (newest first; cap 20 lines; a line pushed past the cap is deleted, never moved -- git and the rolling pin are the archive) ---
