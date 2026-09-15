@@ -591,26 +591,12 @@ def _announce_consent(trail_path):
         f"  (persistent={browser['persistent']}, headless={browser['headless']})"
     )
     print(rule)
-    print(" EACH CAPTURE banks full returned files in a private data/captures run.")
-    print(" That captures.md is UNSANITIZED: review locally before sharing.")
-    print(" A completed nonempty run also selects it in a local adhocwalk.txt.")
-    print(" That router write does not compile, disclose, or copy the archive.")
-    print(" AT THE END, selected lenses become a capped preview, not the archive.")
-    print(" DECANT applies the compiler's baseline disclosure checks before release.")
-    print(f" Type {DECANT_TOKEN} at the end to authorize a local preview file")
-    print(" and a clipboard attempt, both using the same checked text.")
-    print(f" Preview file: {DECANT_PREVIEW_PATH} (0600; replaced, not appended).")
-    print(" Only an authorized preview passing those checks replaces this file.")
-    print(" Declined, refused or blocked attempts leave any older preview unchanged.")
-    print(" A local-file failure is reported; the clipboard attempt still runs.")
-    print(" Inlined lenses:")
-    print(f"   {', '.join(DECANT_INLINE_KEYS)}")
-    print(" These pages may be public or authenticated. Response headers and the")
-    print(" accessibility tree may carry session and account material.")
-    print(" TWO WORDS, TWO ACTS: CAPTURE gates collection to this machine;")
-    print(f" {DECANT_TOKEN} gates the checked preview file and clipboard attempt.")
-    print(" No flag skips either. Baseline checks are not a guarantee of safe disclosure.")
-    print(" Read the bundle before you paste it anywhere.")
+    print(" CAPTURE saves each stop locally; captures may include account details.")
+    print(f" {DECANT_TOKEN} authorizes a checked preview file and a clipboard attempt.")
+    print(f" Preview in workshop: {DECANT_PREVIEW_PATH.relative_to(REPO_ROOT)} (private; replaced on save).")
+    print(" Declining or failing checks leaves any previous preview unchanged.")
+    print(" Nothing is uploaded automatically. The preview is trimmed.")
+    print(" Review before sharing; checks can miss sensitive data.")
     print(rule)
     print("")
 # The router receives a stable capture file, never an @URL cache lookup.
@@ -748,8 +734,8 @@ async def _ride_steps(trail_path, archive, dry_narrate=False, exports_path=None)
     # THE DECANT FENCE LANDED, so this comment's earlier claim that nothing
     # gated the clipboard is RETIRED rather than merely outdated. What the call
     # buys NOW is disclosure BEFORE the material exists: the rider learns at t=0
-    # that a second word will be asked at the end and exactly what the bundle
-    # will contain, so the fence arrives as a formality instead of a surprise.
+    # that DECANT is a separate choice and that its checked preview still
+    # needs review, before either the file or clipboard is attempted.
     # SAME-CAR LABEL RULE, PAID LATE AND THEREFORE WORTH BANKING. The fence and
     # the strings describing it shipped in DIFFERENT rides, so for one ride this
     # function told every rider "WITHOUT ASKING AGAIN" about a gate that does
