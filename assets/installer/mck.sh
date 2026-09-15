@@ -522,6 +522,13 @@ else
     printf '  2  Walk the walk  - open the browser; CAPTURE and DECANT still required.\n'
     printf '  q  Exit (Enter also exits).\nChoice: '
     ANSWER=""
+    # BANKED 2026-09-15 -- THE FIXTURE STOPPED BEFORE THE INTERACTION:
+    # Ten marker-only menu cases passed; actual practice returned with
+    # "read error: Resource temporarily unavailable" before any q response.
+    # This branch then called the failure a clean stop and returned zero.
+    # TODO: reproduce across real narration and distinguish input errors
+    # from EOF. Both playback Popen calls omit stdin: a lead, not a cause
+    # established. No blind retry or success claim from marker-only tests.
     if ! IFS= read -r ANSWER <&3; then
       printf '\nStopped. No real walk started.\n'
       exec 3<&-
