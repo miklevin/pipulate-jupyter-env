@@ -120,11 +120,11 @@ AI_PHOOEY_CHOP = r"""#                                                          
 # This is a real-time book that's already done and always being written.
 
 # --- START STATS ---
-# There are 1,469 already-written articles about this repo at MikeLev.in (Public)
+# There are 1,470 already-written articles about this repo at MikeLev.in (Public)
 # Velocity: 14 published in the last 7 days
-# Markdown negotiated: 2,590 reads (0.22% of all responses)
-# DOM hydration: 2940 trapdoor triggers from 15 non-local IPs (top-N sample, self excluded)
-# Honeybot telemetry fetched 2026-09-14T22:18Z
+# Markdown negotiated: 2,596 reads (0.22% of all responses)
+# DOM hydration: 2942 trapdoor triggers from 15 non-local IPs (top-N sample, self excluded)
+# Honeybot telemetry fetched 2026-09-15T08:53Z
 # --- END STATS ---
 
 # --- START RECEIPTS (newest first; cap 20 lines; a line pushed past the cap is deleted, never moved -- git and the rolling pin are the archive) ---
@@ -1309,13 +1309,19 @@ foo_files.py      #  <-- THIS file. Content compiler router. Makes it very meta.
 # --- START `adhoc.txt` TEMPLATE ---
 # AD HOC CHOP! The Not-Managed-by-Git Safe-for-Client-Data place. Insert Simpson Couch Gag in white space  below (explain anything to the audience you feel needs it explained)G
 # adhoc.txt    _   _   _               ____ _   _  ___  ____  _   
-#     / \   __| | | | | | ___   ___   / ___| | | |/ _ \|  _ \| |  
-# ahe/ _ \ / _` | | |_| |/ _ \ / __| | |   | |_| | | | | |_) | |  
-# ahc ___ \ (_| | |  _  | (_) | (__  | |___|  _  | |_| |  __/|_|   
+#     / \   __| | | | | | ___   ___   / ___| | | |/ _ \|  _ \| |  So'wI' chu'
+# ahe/ _ \ / _` | | |_| |/ _ \ / __| | |   | |_| | | | | |_) | |  So'Ha'
+# ahc ___ \ (_| | |  _  | (_) | (__  | |___|  _  | |_| |  __/|_|  
 #  /_/   \_\__,_| |_| |_|\___/ \___|  \____|_| |_|\___/|_|   (_)  
 
 # To Human: WELCOME TO VIM! It's really NeoVim but I say vim anyway.
 # To AI: This is an alternate 40K view to the big book-ore rolling pin spine.
+
+# 1. **Probe**: Baseline Reading
+# 2. **Context**: Post-experiment *planned* reading instructions
+# 3. **Patch**: The experiment and how to make it happen
+# 4. **Prompt**: Post-experiment instructions and how to read results
+# 5. **Deliverable**: How the world is forever different moving forward
 
 # The first thing you need to know here is that everything that comes after the
 # hash symbol (#) is commented out — and that's EVERYTHING in this file's default
@@ -1325,12 +1331,6 @@ foo_files.py      #  <-- THIS file. Content compiler router. Makes it very meta.
 # `Shift`+`i`, `# `, `Esc` to put the hashes back. You can just arrow-key around
 # here with `h`, `j`, `k`, `l`. Save-and-quit is a bit tricky because another
 # file is also loaded: `Esc`, `:`, `q`, `w`, `!`
-
-# 1. **Probe**: Baseline Reading
-# 2. **Context**: Post-experiment *planned* reading instructions
-# 3. **Patch**: The experiment and how to make it happen
-# 4. **Prompt**: Post-experiment instructions and how to read results
-# 5. **Deliverable**: How the world is forever different moving forward
 
 # If this is stressing you out and you're a quitter and want to quit, just type:
 # `Esc`, `:`, `q`, `!`, `Enter`. That will exit without saving any changes. If
@@ -1379,22 +1379,23 @@ foo_files.py      #  <-- THIS file. Content compiler router. Makes it very meta.
 
 # Every step is one argument longer than the last; the moment a lens shows less than the wire does is the moment to stop scraping.
 
-# STORYTELLING: OPTIONAL, BIG 40K-FOOT VIEW
-# ! python scripts/articles/lsa.py -t 1 --reverse --fmt dated-slugs  # <-- ROLLING PIN that gives the 40K foot book-spine view of book-ore (only works for me because of local-only git repo)
-# GLOSSARY.md                 # <-- Terms defined like back of J.R.R. Tolkien book, grows as `prompt_foo.py` gets scars and shrinks.
-# scripts/articles/lsa.py     # <-- 2ND BRAIN: Search external memory with `rgx`, `rgxc` & `posts` Blogging for Hackers Jekyll-compatible.
-# ~/repos/nixos/autognome.py  # <-- Letting the AIs really understand my environment (The Brave Little Tailor punches above Their Weight Class proving the dunning-kruger effect the gate-keeper's (lower-case) lament.)
- 
-# STILL BIG BUT LESS OPTIONAL (especially flake.nix)
-# init.lua                    # <-- Daily driver hot-keys that overlap with aliases in flake.nix. `<leader>m` makes it Science (this process)!
-# flake.nix                   # <-- THE ONE BIG THING TO INCLUDE Infrastructure as Code (IaC) tells LLM about your system down to the metal
-# prompt_foo.py               # <-- THIS SYSTEM
-# foo_files.py                # <-- MAIN ROUTER FILE (alternative to this one)
+# FOR 40K-FT VIEW (STORY & INFRASTRUCTURE) 
+# --- START EDITING-IN ON 1ST TURN ---
 
-# TINY BUT EXCELLENT FOR "THIS SYSTEM" CONTEXT (OK to include every time / automatically = `apply.py`, `.gitignore`, `.gitattributes`)
-# requirements.in             # <-- All known dependencies and (necessary) version pinning. WORA gotcha's exposed.
-# __init__.py                 # <-- Master versioning
-# pyproject.toml              # <-- The PyPI Packaging details
+! python scripts/articles/lsa.py -t 1 --reverse --fmt dated-slugs  # <-- ROLLING PIN that gives the 40K foot book-spine view of book-ore (only works for me because of local-only git repo)
+~/repos/nixos/autognome.py  # <-- You wake up in the morning and your Tooling & Instrumentation folds out of you like Inspector Gadget.
+init.lua                    # <-- Those gadgets are made easy-to-use through nifty keyboard shortcuts (but ya gotta learn vim).
+GLOSSARY.md                 # <-- Like the back of a J.R.R. Tolkien book, there's kooky new terms to know.
+flake.nix                   # <-- Here is my hardware. Here is my state. Put on your sandbox. And please recreate. (Infrastructure as Code / IaC)
+prompt_foo.py               # <-- THIS system
+foo_files.py                # <-- main ROUTER
+requirements.in             # <-- We've "pinned" everything but still want a flexible Python Data Science virtualenv.
+pyproject.toml              # <-- How this is a citizen of the Python "pip install" ecosystem
+__init__.py                 # <-- Version info
+
+# --- END EDITING-IN ON 1ST TURN ---
+
+# scripts/articles/lsa.py     # <-- 2ND BRAIN: Search external memory with `rgx`, `rgxc` & `posts` Blogging for Hackers Jekyll-compatible.
 
 # OPTIONAL ACTUATORS (cheap and good to include to expand the AI's capabilities)
 # cli.py                      # <-- Catch-all actuator for PyPI envs, Python anchoring, MCP tool-call (plus alternatives) and **kwargs like wrapping for CLI
@@ -1427,7 +1428,6 @@ foo_files.py      #  <-- THIS file. Content compiler router. Makes it very meta.
 # Un-comment lines, add lines with absolute-path filenames or `! ` commands. 
 
 # Context 1 (Edit-in selections from above and add new files immediately below)
-# HINT: move cursor to this line and hit `d`, `d` in rapid succession then hit `i` and start typing.
 
 # --- END `adhoc.txt` TEMPLATE ---
 
