@@ -1475,7 +1475,7 @@ runScript = pkgs.writeShellScriptBin "run-script" ''
           defaultu() { (cd "$PIPULATE_ROOT" && python prompt_foo.py --chop DEFAULT_CHOP "$@"); }
           ahc() { (cd "$PIPULATE_ROOT" && python prompt_foo.py --chop ADHOC_CHOP --no-tree "$@"); }
           ahcu() { (cd "$PIPULATE_ROOT" && python prompt_foo.py --chop ADHOC_CHOP "$@"); }
-          # THE WALK-ROUTER TWIN. Chapter VIII-c says to keep an alternate
+          # THE WALK-ROUTER TWIN. Chapter VIII-b says to keep an alternate
           # router selection LOCAL to the compiler invocation and never in the
           # parent shell. That was prose beside a mechanism with nothing
           # gating it, which THE PUBLISH-ROSTER RULE convicts: prose beside a
