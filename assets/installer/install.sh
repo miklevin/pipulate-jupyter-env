@@ -326,11 +326,21 @@ if [ "${PIPULATE_INSTALL_ONLY:-0}" = "1" ]; then
   exit 0
 fi
 
+# THE SHIM ON THIS LANE TOO (convicted 2026-09-14, operator's lane). The
+# install-only branch above got its inline LD_LIBRARY_PATH clear on
+# 2026-08-01; this hand-off never did, and the first curl|bash run from
+# INSIDE a workshop shell died the moment it reached nix develop, with
+# libssl and glibc version errors from the shell's own library path. THE
+# UNEXPORTED-SHIM RULE, same disease, other lane: the interactive nix()
+# wrapper is a function no child inherits, every child inherits the
+# pollution, and a stranger on a clean shell never sees any of it -- which
+# is why it survived six weeks and two witnessed installs. The empty
+# assignment is a no-op on a clean shell, so it costs a stranger nothing.
 if [ -c /dev/tty ]; then
-    bash -c "cd '${TARGET_DIR}' && ${NIX_DEVELOP_CMD}" < /dev/tty
+    bash -c "cd '${TARGET_DIR}' && LD_LIBRARY_PATH='' ${NIX_DEVELOP_CMD}" < /dev/tty
 else
     # Fallback for highly restricted environments
-    cd "${TARGET_DIR}" && ${NIX_DEVELOP_CMD}
+    cd "${TARGET_DIR}" && LD_LIBRARY_PATH="" ${NIX_DEVELOP_CMD}
 fi
 }
 
