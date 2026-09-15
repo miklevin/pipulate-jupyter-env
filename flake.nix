@@ -619,7 +619,6 @@ runScript = pkgs.writeShellScriptBin "run-script" ''
             # fences that would become command substitution inside a
             # double-quoted printf. Moving the document is a content decision,
             # not this move.
-            echo "INFO: Setting up your personal Playground..."
             cat << 'PLAYGROUND_EOF' > "Notebooks/Playground/WELCOME.md"
           # 🎢 Welcome to the Playground!
           
@@ -988,11 +987,14 @@ runScript = pkgs.writeShellScriptBin "run-script" ''
         gitUpdateLogic = ''
           # MAGIC COOKIE TRANSFORMATION
           if [ ! -d .git ]; then
-            echo "🔄 Transforming installation into git repository..."
+            # QUIET TRANSFORM (2026-09-14, the first Mac install from npvg.org).
+            # This branch printed four announcements and git clone printed
+            # seven progress lines, and none of the eleven discriminated
+            # anything: a clone that fails prints its own fatal, and the one
+            # verdict line at the end says what happened and where the
+            # pre-transform files went. The failure branch is untouched.
             TEMP_DIR=$(mktemp -d)
-            echo "Creating temporary clone in $TEMP_DIR..."
-            if git clone --depth=1 https://github.com/pipulate/pipulate.git "$TEMP_DIR"; then
-              echo "Preserving app identity and credentials..."
+            if git clone --quiet --depth=1 https://github.com/pipulate/pipulate.git "$TEMP_DIR"; then
               if [ -f whitelabel.txt ]; then cp whitelabel.txt "$TEMP_DIR/"; fi
               if [ -d .ssh ]; then
                 mkdir -p "$TEMP_DIR/.ssh"
@@ -1000,18 +1002,14 @@ runScript = pkgs.writeShellScriptBin "run-script" ''
                 chmod 600 "$TEMP_DIR/.ssh/rot" 2>/dev/null || true
               fi
               if [ -d .venv ]; then
-                echo "Preserving virtual environment..."
                 cp -r .venv "$TEMP_DIR/"
               fi
               BACKUP_DIR=$(mktemp -d)
-              echo "Creating backup of current directory in $BACKUP_DIR..."
               cp -r . "$BACKUP_DIR/"
               find . -maxdepth 1 -not -path "./.*" -exec rm -rf {} \; 2>/dev/null || true
-              echo "Moving git repository into place..."
               cp -r "$TEMP_DIR/." .
               rm -rf "$TEMP_DIR"
-              echo "✅ Successfully transformed into git repository!"
-              echo "Original files backed up to: $BACKUP_DIR"
+              echo "✅ Transformed into a git repository (pre-transform files backed up to $BACKUP_DIR)."
             else
               echo "❌ Error: Failed to clone repository."
             fi
