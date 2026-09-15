@@ -1600,157 +1600,126 @@ __init__.py                 # <-- Version info
 # before scraping (Chrome locks the profile); re-run when a site expires it.
 # scripts/weblogin.py  # <-- `weblogin <apex>`: warm a persistent login for scraping
 # ============================================================================
-# VIII-b. THE MOTHER CAT KATA - Carry the human by the scruff, one gate at a time
+# VIII-b. THE FLIGHT DATA RECORDER - The Mother Cat Kata: the walk is the flight, the capture is the data, the seal is the receipt
 # ============================================================================
-# CHAPTER BLURB — THE MCK: the record-and-playback session that carries a
-# newcomer bookmark to bookmark instead of offering a menu of twelve doors.
-# Four primitive moves — SETTLE (human-only), CAPTURE (machine-only), NARRATE
-# (and FENCE: refuse to advance without a receipt), ADVANCE. The trail is DATA
-# (a YAML file), the rider is CODE, and the split is the point: a new
-# walkthrough should be a new YAML, never a new script.
-# STATUS 2026-08-09. The 2026-08-01 line this replaces said these files were
-# "UNREAD by any compile so far" and stayed wrong for eight days while the
-# whole lane was read, ridden, patched and sealed. PROTECTION-LAG POLARITY in
-# its expensive direction: the router UNDERSTATED what exists, so a reader who
-# trusted the constitution over the source would call the lane vapor.
-# OBSERVED, each dated in the corpus: public_walk rode green end to end
-# 2026-08-01; all four trails sealed to content-addressed cartridges and
-# re-sealed to identical digests 2026-08-07; the DECANT egress fence and the
-# consent surface landed 2026-08-07; a filled authoring surface compiled to a
-# trail that walk.py loaded unmodified 2026-08-09.
-# THE AUTHENTICATED-RIDE DEBT IS DISCHARGED (2026-09-01): jira_for_you captured
-# a logged-in Jira page on profile default -- final_url exact, so no
-# id.atlassian.com redirect -- and DECANTED it. Whether the sign-in happened
-# inside the ride or was inherited from the warmed profile is UNRECORDED; the
-# next ride on a cold profile records it.
-# STILL OWED: a signature over the sealed manifest, and ONE TRAIL PER AUTH
-# KIND -- none / OAuth / API-key -- each findable by name FROM THIS CHAPTER.
-# That last one is what this chapter is for.
-# THE PATHS BELOW STAY COMMENTED ON PURPOSE: a commented path costs zero
-# payload tokens and still drops the file out of the Paintbox, because
-# update_paintbox_in_place strips the leading hash before deciding a path is
-# claimed. Findable without being loaded is the whole trick.
-# scripts/mother_cat.py       # <-- The rider (alias: mothercat)
-# scripts/walk.py             # <-- Trail loader/validator; holds DEFAULT_TRAIL
-# scripts/bookmark_import.py  # <-- bookmarks.html -> authoring surface + gitignored exports
-# scripts/walk_compile.py     # <-- authoring surface -> JSON-subset trail; refuses on every TODO
-# scripts/walk_cartridge.py   # <-- trail -> sealed walk cartridge (seal / verify / show)
-# AUTH RULING (banked 2026-08-09, source-witnessed): THERE IS NO AUTH FIELD IN
-# THE TRAIL SCHEMA. walk.py's _exact() enforces set-difference in BOTH
-# directions over the root, defaults, stop and connector field sets, so a trail
-# CANNOT declare an auth kind without changing walk.py first. TWO AUTH SURFACES
-# exist and only ONE is live at ride time:
-#   BROWSER AUTH -- defaults.profile_name plus persistent, i.e. which warmed
-#     uc_profiles directory opens. Exercised on EVERY ride. This IS what SETTLE
-#     means, and it is the only auth surface a trail can select.
-#   CONNECTOR AUTH -- connector.script, i.e. the wallet kind (oauth_token_file,
-#     bearer_token, basic_auth, service_account_file). NEVER exercised by a
-#     ride: mother_cat.py's docstring puts connector execution out of scope and
-#     _ride_async never reads the connector key. walk.py BUILDS the argv for
-#     the dry-run plan and nothing runs it.
-# RULING: OAuth and API-key are NOT distinct rides at the trail level. Three
-# near-identical YAMLs differing only in an inert string would be the
-# sibling-md failure with our own hands on it. The auth-kind EXAMPLE SET
-# ALREADY EXISTS and it is scripts/connectors/README.md -- five kinds, one
-# working connector each, plus the warm red/green board that tests them live.
-# Note also that first_context declares THREE wallet kinds in one trail, so a
-# trail was never the unit of auth; a stop is, and even that is a declaration.
-# WHAT IS MISSING IS A RECEIPT, NOT A FILE: no trail on a NON-DEFAULT profile
-# has ever been ridden, so browser auth is witnessed only in its trivial form.
-# botify_pageworkers IS that shape. Trap worth naming: weblogin defaults to
-# --profile default, so warming for that trail needs --profile botify, and
-# scraper_tools mkdirs a missing profile silently -- an unwarmed name opens a
-# logged-out browser with no error anywhere.
-# assets/trails/practice.yaml            # UNREAD; label stale since 2026-08-01
-# assets/trails/public_walk.yaml         # profile default; SETTLE trivial; RIDDEN 2026-08-01
-# assets/trails/first_context.yaml       # profile default; SETTLE real; UNRIDDEN
-# assets/trails/botify_pageworkers.yaml  # profile botify; SETTLE real; UNRIDDEN
-# assets/trails/jira_for_you.yaml        # profile default; SETTLE real (Atlassian sign-in); top of the ticket loop; RIDDEN 2026-09-01
+# CHAPTER BLURB: an airliner carries two recorders. The FLIGHT DATA RECORDER
+# logs what the instruments measured; the cockpit voice recorder logs what the
+# crew said. A model narrating what it did is the voice recorder. A walk is the
+# flight: a rider carries a human bookmark to bookmark, a voice reads each
+# stop, and nothing advances until the human types CAPTURE, at which point the
+# page as served, the page as built, every request it made, its headers and
+# its outline land on disk with a hash. DECANT bundles them; the compile seals
+# them. Four moves, one of them human-only -- SETTLE (log in, clear the
+# CAPTCHA; the machine inherits the session and never fakes it), CAPTURE,
+# NARRATE/FENCE, ADVANCE -- and DECANT once at the end. The whole vocabulary:
+# rg -in 'mother cat kata' GLOSSARY.md. The trail is DATA, the rider is CODE,
+# and the split is the point: a new walkthrough is a new trail, never a new
+# script. THE PATHS BELOW STAY COMMENTED ON PURPOSE: a commented path costs
+# zero payload tokens and still claims its file out of the Paintbox, because
+# update_paintbox_in_place strips the leading hash before deciding.
+#
+# TWO FORMS OF ONE TRAIL, and swapping their labels is the whole confusion. The
+# AUTHORING form is Markdown (<name>.walk.md): one section per stop, a short
+# head of plain key: value lines, guidance as prose in the body -- because
+# guidance is a paragraph Piper reads aloud, and prose escaped into one JSON
+# string is where typos hide. The SEALED form (assets/trails/<name>.yaml) is
+# machine cargo in the JSON subset of YAML 1.2, valid YAML by grammar and parsed
+# by json.loads under a duplicate-key hook, for three reasons: the stdlib has
+# no YAML parser and every walk script is one fetchable file; the sealer hashes
+# exact bytes and YAML admits many spellings of one document; duplicate keys
+# fail closed. So there are TWO compilers, not one: walk_compile.py turns the
+# Markdown into the trail, walk_cartridge.py turns the trail into a
+# content-addressed zip. rg -in 'compiled trail' GLOSSARY.md for the ruling.
+#
+# LAUNCH
+# walk                        # <-- Repo-root wrapper; delegates to mck.sh, NOT to scripts/walk.py
+# assets/installer/mck.sh     # <-- THE LAUNCHER (curl -fsSL pipulate.com/mck.sh | bash): finds the workshop, forces the spoken rehearsal on first contact, asks for the word RIDE
+# scripts/mother_cat.py       # <-- THE RIDER (alias: mothercat), Car B: actuates walk.py's validated plan; per-run capture banking, DECANT, the adhocwalk.txt writer
+# scripts/boot_menu.py        # <-- The three-door workshop menu; `walk` is door 2 plus one word
+# scripts/sources_menu.py     # <-- The roster door 2's words print; not a connector executor
+#
+# AUTHOR
+# scripts/bookmark_import.py  # <-- One bookmark folder -> <name>.walk.md (the human surface) + <name>.exports.sh (the URL values; gitignored by pattern so they never ship)
+#
+# COMPILE
+# scripts/walk_compile.py     # <-- .walk.md -> assets/trails/<name>.yaml; refuses on every TODO left in the surface; stdlib only, imports nothing
+#
+# VALIDATE
+# scripts/walk.py             # <-- Car A, the planner: loads a trail, refuses unknown or missing keys in BOTH directions, prints the dry-run plan; holds DEFAULT_TRAIL; never actuates
+#
+# SEAL
+# scripts/walk_cartridge.py   # <-- trail -> data/walks/<sha256>/walk.zip (trail + manifest with hash and consent surface); reseal is byte-identical; its docstring still says integrity-v2 while the constant says v3 (todo)
+#
+# CAPTURE
+# scripts/weblogin.py         # <-- SETTLE ahead of time: warm a login on the persistent profile; --profile default unless told otherwise
+# tools/scraper_tools.py      # <-- The browser capture and the CAPTURE fence (_capture_checkpoint is a write barrier, not a prompt)
+# imports/voice_synthesis.py  # <-- Piper: scripted narration, never a model (ATTRIBUTED-VOICE)
+#
+# HAND OFF
+# prompt_foo.py               # <-- Compiles the selected router (adhocwalk.txt through `ahcw`) into a payload
+# scripts/foo_cartridge.py    # <-- The second seal, over the EVIDENCE: payload.md, prompt.md, manifest.json
+# scripts/foo_replay.py       # <-- Context extraction and attention checks; not browser or API replay
+# tests/test_mck_rep2.py      # <-- Rep 2: the earmark's owed side-by-side witness
+#
+# THE TRAILS (bundled; each status is the newest receipt, never a promise)
+# assets/trails/public_walk.yaml         # profile default; SETTLE trivial; three public pages, connector noop.py; RIDDEN 2026-08-01; what bare `walk` rides
+# assets/trails/practice.yaml            # one configurable page; UNREAD, label stale since 2026-08-01
+# assets/trails/first_context.yaml       # profile default; SETTLE real; Jira/Botify/Gmail, THREE wallet kinds in one trail; UNRIDDEN
+# assets/trails/botify_pageworkers.yaml  # profile botify; SETTLE real; UNRIDDEN -- the only trail on a non-default profile, and no such ride has ever been witnessed
+# assets/trails/jira_for_you.yaml        # profile default; SETTLE real (Atlassian sign-in); top of the ticket loop; RIDDEN 2026-09-01 and DECANTED, the sign-in moment unrecorded (a cold profile records it)
 # assets/trails/ticket.yaml              # profile default; SETTLE real; url_env x2 (JIRA, BOTIFY) fed by one gitignored exports file per ticket under Notebooks/Client_Work/tickets/; stop two of the ticket loop; RIDDEN 2026-09-01 to stop 1 then REFUSED at stop 2 on an unset url_env, Linux and Mac -- the ride that bought the rider its PRE-FLIGHT. RULING: the connector does NOT run at DECANT (DECANT gates only CAPTURE-fenced material; API auth is a different wallet; the rider never harvests). The bridge to the issue text is a ! line in adhoc.txt.
 # assets/trails/se_ticket.yaml           # profile default; SETTLE real; the SE ticket template: for_you (literal) + issue (JIRA, required) + project/slack/confluence (optional, skipped when unset); RIDDEN 2026-09-02, 3 of 5 captured, 2 skipped, 72,383 B decanted, card showed both rows; harvest regexes on optional stops are PLACEHOLDERS (botify_analysis's already fullmatched a live analysisSlug); guidance strings hand-count "of five" and go stale on the sixth stop
-# tests/test_mck_rep2.py      # <-- Rep 2: the earmark's owed side-by-side witness
-# assets/installer/mck.sh     # <-- THE LAUNCHER: curl -fsSL pipulate.com/mck.sh | bash
-#
-# ============================================================================
-# VIII-c. WALK TO CONTEXT - Instructions, evidence, selection, hand-off
-# ============================================================================
-# CHAPTER BLURB (2026-09-08): a guided browser visit and an AI context compile
-# are separate jobs joined by an ordinary text list. The human owns adhoc.txt;
-# a completed nonempty walk replaces adhocwalk.txt beside it. Both use the
-# same existing router grammar. No automatic merge, compile, or transmission
-# occurs when the walk writes its selection.
-#
-# ENTRY AND NAVIGATION
-# walk                          # <-- Repository wrapper; delegates to mck.sh, not scripts/walk.py
-# assets/installer/mck.sh       # <-- Workshop discovery, rehearsal, and ride launcher
-# scripts/boot_menu.py          # <-- Initial workshop door selection, not capture
-# scripts/sources_menu.py       # <-- Source-command roster, not a connector executor
-#
-# INSTRUCTIONS: AUTHOR, VALIDATE, SEAL
-# scripts/bookmark_import.py    # <-- Bookmarks -> editable .walk.md plus URL exports
-# scripts/walk_compile.py       # <-- Completed authoring text -> JSON-subset YAML trail
-# scripts/walk.py               # <-- Trail validation, browser parameters, dry-run plan
-# scripts/walk_cartridge.py     # <-- Seals trail instructions and derived consent, not captured results
-# assets/trails/public_walk.yaml    # <-- Public-page practice itinerary
-# assets/trails/practice.yaml       # <-- One configurable page
-# assets/trails/first_context.yaml  # <-- Authenticated Jira/Botify/Gmail itinerary
-#
-# OBSERVATION: PREPARE, CAPTURE, PRESERVE
-# scripts/weblogin.py           # <-- Warm a persistent browser login separately
-# tools/scraper_tools.py        # <-- Browser capture and returned observation files
-# imports/voice_synthesis.py    # <-- Spoken guidance; narration is not model inference
-# scripts/mother_cat.py         # <-- Guided rider, per-run capture banking, DECANT, router writer
-# scripts/connectors/noop.py    # <-- Honest non-operative connector target for the public trail
-# scripts/connectors/README.md  # <-- Separate API-source and credential contracts
-#
-# CONTEXT: SELECT, COMPILE, VERIFY
-# prompt_foo.py                 # <-- Reads the selected router and compiles its requested material
-# scripts/foo_cartridge.py      # <-- Seals/verifies payload.md, prompt.md, manifest.json
-# scripts/foo_replay.py         # <-- Context extraction/attention checks, not browser or API replay
-#
-# FOUR OUTPUTS, NOT FOUR NAMES FOR THE SAME THING
-#   Evidence: captures.md banks returned file bytes before ADVANCE; a mutable
-#   browser-cache path is not the historical record. Coverage is what the
-#   capture returned, not a guarantee of every network body.
-#   Preview: DECANT releases selected capped text, not the whole raw archive.
-#   Disclosure: captures.disclosed.json is a separately prepared derivative
-#   with omissions and review status; the router writer does not create it.
-#   Selection: adhocwalk.txt names one raw captures.md archive and labels it
-#   UNSANITIZED. The list is neither disclosure approval nor the evidence itself.
-#
-# THE HANDOFF LANDED IN 97feb327 (operator transcript; diff in this cartridge).
-# _finish_capture_archive requests an update only for complete + nonempty.
-# _write_walk_router derives target = human.with_name("adhocwalk.txt") from the
-# SELECTED router and writes the WHOLE file: three comment lines plus one
-# absolute path, staged at 0600 and os.replace'd. IT REPLACES, IT NEVER MERGES.
-# Nothing hand-added to adhocwalk.txt survives a completed run, so a hand-typed
-# `!` line belongs in adhoc.txt, the file ahcw deliberately does not select;
-# the seam between the two is a COPY, which is what _print_next_compile is for.
-# with_name IS IDEMPOTENT ON THAT NAME: riding from a shell where
-# PIPULATE_ADHOC_FILE already names adhocwalk.txt makes target == human, the
-# alias guard refuses by name, and the caller reports WALK ROUTER NOT UPDATED
-# (ValueError) non-fatally with the archive preserved. This is why ahcw assigns
-# in a subshell rather than exporting. Success is not silent either:
-# WALK ROUTER <path> (0600; UNSANITIZED; not compiled).
-# Partial or empty runs retain the older completed selection. An ordinary
-# router-write exception is reported after finalization, rather than replacing
-# the capture outcome. Neither compiler readers nor launcher needed changing.
-#
-# SELECTING IS NOT INCLUDING: PIPULATE_ADHOC_FILE chooses the list consumed by
-# ADHOC_CHOP. Naming adhocwalk.txt inside another list includes its text; it
-# does not recursively execute that file's entries. Keep any deliberate
-# alternate selection local to the compiler invocation, not the parent shell.
-#
-# EVIDENCE BOUNDARY: the supplied operator fixture reported GO for real
-# temporary-file creation/replacement, permissions, protected bytes, and
-# injected write failures; its archive append was mocked. This chapter does
-# not promote that fixture into a production browser-to-compiler receipt.
-# The existing COMPOSITION IS NOT THE PARTS debt owns that integration gap.
-# These commented paths document the chapter; they do not activate a CHOP.
-#
 #
 # OFF-ROSTER DISTRIBUTION RESIDUE (not a walk dependency)
-# assets/installer/replay.sh  # <-- OFF the roster 2026-08-01; re-add needs syntax + one ride + a pinned verifier fetch
+# assets/installer/replay.sh  # <-- OFF the roster 2026-08-01, stranded; re-add needs syntax + one ride + a pinned verifier fetch
+#
+# FOUR OUTPUTS, NOT FOUR NAMES FOR ONE THING. Evidence: captures.md banks the
+# returned file bytes with sha256 BEFORE ADVANCE; a mutable browser_cache path
+# is not the record, and coverage is what the capture returned, not every
+# network body. Preview: DECANT releases selected, capped text, never the raw
+# archive. Disclosure: captures.disclosed.json is a separately prepared
+# derivative with omissions and review status; nothing writes it for you.
+# Selection: adhocwalk.txt names one raw captures.md and labels it UNSANITIZED;
+# the list is neither disclosure approval nor the evidence.
+#
+# THE HANDOFF (97feb327): a complete, nonempty run has the rider write
+# adhocwalk.txt WHOLE beside the selected router -- three comment lines and one
+# absolute path, 0600, os.replace'd. IT REPLACES, IT NEVER MERGES, so a
+# hand-typed `!` line belongs in adhoc.txt, the file `ahcw` deliberately does
+# not select; the seam between the two is a copy. Riding from a shell where
+# PIPULATE_ADHOC_FILE already names adhocwalk.txt refuses by name, non-fatally,
+# archive preserved, which is why ahcw assigns in a subshell rather than
+# exporting. SELECTING IS NOT INCLUDING: naming adhocwalk.txt inside another
+# list includes its text and never recurses into its entries.
+#
+# AUTH RULING (banked 2026-08-09, source-witnessed): THERE IS NO AUTH FIELD IN
+# THE TRAIL SCHEMA. walk.py enforces set-difference in BOTH directions over the
+# root, defaults, stop and connector field sets, so a trail cannot declare an
+# auth kind. TWO SURFACES, ONE LIVE AT RIDE TIME. BROWSER AUTH is
+# defaults.profile_name plus persistent, which warmed uc_profiles directory
+# opens; exercised on every ride; this IS what SETTLE means. CONNECTOR AUTH is
+# connector.script, the wallet kind; NEVER exercised by a ride -- walk.py builds
+# the argv for the plan and nothing runs it. So OAuth and API-key are NOT
+# distinct rides, and three YAMLs differing only in an inert string would be
+# the sibling-md failure; the auth-kind example set already exists in chapter
+# XVIII's connector README, five kinds, one working connector each, plus the
+# `warm` red/green board. THE DUAL LANE (2026-08-25): a stop declares exactly
+# one of `url` (public) or `url_env` (a variable the trail NAMES and a
+# gitignored exports file HOLDS), so a "private" walk is usually a publishable
+# trail plus a private values file. TRAP: weblogin defaults to --profile
+# default, and scraper_tools mkdirs a missing profile silently, so an unwarmed
+# profile name opens a logged-out browser with no error anywhere.
+#
+# STILL OWED: a signature over the sealed manifest (a hash buys integrity,
+# never authorship); one witnessed ride on a NON-DEFAULT profile
+# (botify_pageworkers is the shape); the end-to-end seam, which THE
+# COMPOSITION IS NOT THE PARTS earmark owns -- the walk-to-compiler fixture
+# reported GO with its archive append mocked, and this chapter does not
+# promote it; and THE WALK THAT TEACHES WALKS, public_walk's shape with npvg.org
+# pages for stops and the lesson in each guidance field. Nothing in the repo
+# fetches a trail over the network yet; when something does, a trail that can
+# change out from under you is not replayable, so seal on arrival and ride the
+# sealed copy.
 
 # ============================================================================
 # IX. SURVEYING LANDSCAPE - You're dead in the water without intelligence (HONEYBOT TV STUDIO)
@@ -2004,6 +1973,8 @@ __init__.py                 # <-- Version info
 # scripts/connectors/wallet.py
 # scripts/connectors/mcp.py
 # scripts/connectors/mcp_warm.py  # <-- One-shot OAuth 2.1 PKCE warmer; writes the token file mcp.py's resolve_token already reads
+# scripts/connectors/noop.py      # <-- The honest non-operative connector: one positional, prints what it received, exits 0; what public_walk.yaml names at every stop, because a plan must name something that RUNS
+# scripts/mcp_dummy_server.py     # <-- The fault harness behind mcp.py (20/20 against the unmodified client); it shares mcp.py's spec reading, so its agreement is a tautology, never a vendor witness
 #  _____ _           _           _   _                      
 # |  ___(_)_ __   __| |   __ _  | | | | ___  _ __ ___   ___ 
 # | |_  | | '_ \ / _` |  / _` | | |_| |/ _ \| '_ ` _ \ / _ \
